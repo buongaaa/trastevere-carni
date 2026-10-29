@@ -448,6 +448,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 }
 @media (max-width:360px){ .logo i{display:none} }
 @media (max-width:640px){ body.d-open .toast{bottom:auto;top:calc(16px + env(safe-area-inset-top,0px))} }
+.map-load{width:100%;height:100%;min-height:420px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--muted);background:linear-gradient(var(--line) 1px,transparent 1px) 0 0/40px 40px,linear-gradient(90deg,var(--line) 1px,transparent 1px) 0 0/40px 40px,var(--card);font-size:.85rem;text-align:center;padding:20px}
+.map-load b{font-family:var(--serif);font-size:1.4rem;color:var(--cream)}
+.map-load a{color:var(--gold)}
 </style>
 </head>
 <body>
@@ -722,7 +725,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
         </div>
       </div>
       <div class="map reveal">
-        <iframe loading="lazy" title="Mappa Trastevere Carni" src="https://maps.google.com/maps?q=Via%20Guglielmo%20Mengarini%2067%2C%2000149%20Roma&z=16&output=embed"></iframe>
+        <button class="map-load" id="mapLoad" type="button"><b>Mostra la mappa</b><span>Caricando la mappa accetti i cookie di Google Maps · <a href="note-legali.html#cookie">info</a></span></button>
       </div>
     </div>
   </div>
@@ -731,7 +734,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 <footer>
   <div class="wrap">
     <div><span class="logo" style="font-size:1.1rem">Trastevere <i>Carni</i></span><div style="margin-top:6px">Macelleria · Via Guglielmo Mengarini 67/69, 00149 Roma</div><div style="margin-top:4px"><a href="mailto:trasteverecarni@gmail.com" style="color:var(--muted)">trasteverecarni@gmail.com</a></div><div class="social"><a href="https://www.instagram.com/trasteverecarni/" target="_blank" rel="noopener" aria-label="Instagram @trasteverecarni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a><a href="https://www.facebook.com/trasteverecarni" target="_blank" rel="noopener" aria-label="Facebook Trastevere Carni"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v2H8v4h2v8h4v-8h3l1-4h-4V8.5c0-.3.2-.5.5-.5Z"/></svg></a></div></div>
-    <div>© <span id="yr"></span> Trastevere Carni S.r.l. · P.IVA 14039211009<div class="legal"><a href="#condizioni">Condizioni di vendita</a><a href="#privacy">Privacy</a><a href="#cookie">Cookie</a><a href="#recesso">Resi e rimborsi</a></div></div>
+    <div>© <span id="yr"></span> Trastevere Carni S.r.l. · P.IVA 14039211009<div class="legal"><a href="note-legali.html#condizioni">Condizioni di vendita</a><a href="note-legali.html#privacy">Privacy</a><a href="note-legali.html#cookie">Cookie</a><a href="note-legali.html#recesso">Resi e rimborsi</a><a href="note-legali.html#chi-siamo">Note legali</a></div></div>
   </div>
 </footer>
 
@@ -787,7 +790,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       <div class="weight-note" id="weightNote"><span>⚖️</span><span>La carne viene pesata al momento del taglio. Sulla carta <b>blocchiamo l'importo stimato</b> e addebitiamo solo il peso reale: l'eventuale differenza viene sbloccata in automatico.</span></div>
       <label class="check"><input type="checkbox" id="fInvoice"> Mi serve la fattura</label>
       <div id="invoiceBox" hidden class="two"><input id="fVat" placeholder="Codice fiscale o P.IVA"><input id="fSdi" placeholder="Codice SDI o PEC"></div>
-      <label class="check"><input type="checkbox" id="fTerms"> <span>Ho letto e accetto le <a href="#condizioni">condizioni di vendita</a> e l'<a href="#privacy">informativa privacy</a> *</span></label>
+      <label class="check"><input type="checkbox" id="fTerms"> <span>Ho letto e accetto le <a href="note-legali.html#condizioni" target="_blank" rel="noopener">condizioni di vendita</a> e l'<a href="note-legali.html#privacy" target="_blank" rel="noopener">informativa privacy</a> *</span></label>
       <label class="check"><input type="checkbox" id="fNews"> <span>Voglio ricevere offerte e novità del banco (facoltativo)</span></label>
       <div class="summary" id="summary"></div>
     </div>
@@ -1310,6 +1313,14 @@ $('#lb').addEventListener('click', e=>{ if(e.target.id==='lb') lbClose(); });
 addEventListener('keydown', e=>{ if($('#lb').hidden) return; if(e.key==='Escape') lbClose(); if(e.key==='ArrowLeft') lbShow(gi-1); if(e.key==='ArrowRight') lbShow(gi+1); });
 $('#lb').addEventListener('touchstart', e=>{ sx = e.touches[0].clientX; }, {passive:true});
 $('#lb').addEventListener('touchend', e=>{ if(sx===null) return; const dx = e.changedTouches[0].clientX - sx; if(Math.abs(dx)>50) lbShow(gi + (dx<0?1:-1)); sx = null; });
+
+// --- Mappa su richiesta
+$('#mapLoad').addEventListener('click', e=>{
+  if(e.target.closest('a')) return;
+  const f=document.createElement('iframe'); f.title='Mappa Trastevere Carni'; f.loading='lazy';
+  f.src='https://maps.google.com/maps?q=Via%20Guglielmo%20Mengarini%2067%2C%2000149%20Roma&z=16&output=embed';
+  $('#mapLoad').replaceWith(f);
+});
 
 // --- Nav, reviews, reveal
 addEventListener('scroll', ()=>$('#nav').classList.toggle('scrolled', scrollY>20), {passive:true});
