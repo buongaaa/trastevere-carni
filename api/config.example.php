@@ -15,3 +15,7 @@ const SITE_URL   = 'https://trasteverecarni.it';    // senza barra finale
 const SHOP_NAME  = 'Trastevere Carni';
 const SHOP_EMAIL = 'trasteverecarni@gmail.com';     // qui arrivano gli ordini
 const FROM_EMAIL = 'ordini@trasteverecarni.it';     // casella creata su Hostinger (Email) con il dominio
+
+// Invio email tramite la casella qui sopra (più affidabile, meno spam). Metti la password della casella ordini@.
+const SMTP_HOST = 'smtp.hostinger.com';
+const SMTP_PASS = 'INSERISCI_PASSWORD_CASELLA_ORDINI';

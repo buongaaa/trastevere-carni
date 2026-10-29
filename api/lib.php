@@ -204,7 +204,59 @@ function order_html(array $o, bool $forShop): string {
     return $html . '</div>';
 }
 
+// Invio tramite il server di posta di Hostinger con la casella FROM_EMAIL (autenticato: meno spam, più affidabile)
+function smtp_send(string $to, string $subject, string $html, string $replyTo = ''): bool {
+    $fp = @stream_socket_client('ssl://' . SMTP_HOST . ':465', $errno, $errstr, 20);
+    if (!$fp) { error_log("SMTP connessione: $errstr"); return false; }
+    stream_set_timeout($fp, 20);
+    $read = function () use ($fp): string {
+        $data = '';
+        while (($line = fgets($fp, 515)) !== false) {
+            $data .= $line;
+            if (isset($line[3]) && $line[3] === ' ') break;
+        }
+        return $data;
+    };
+    $cmd = function (string $c, string $expect) use ($fp, $read): void {
+        fwrite($fp, $c . "\r\n");
+        $r = $read();
+        if (strpos($r, $expect) !== 0) throw new RuntimeException(trim($r));
+    };
+    try {
+        $r = $read();
+        if (strpos($r, '220') !== 0) throw new RuntimeException(trim($r));
+        $cmd('EHLO trasteverecarni.it', '250');
+        $cmd('AUTH LOGIN', '334');
+        $cmd(base64_encode(FROM_EMAIL), '334');
+        $cmd(base64_encode(SMTP_PASS), '235');
+        $cmd('MAIL FROM:<' . FROM_EMAIL . '>', '250');
+        $cmd('RCPT TO:<' . $to . '>', '25');
+        $cmd('DATA', '354');
+        $headers = [
+            'Date: ' . date('r'),
+            'From: =?UTF-8?B?' . base64_encode(SHOP_NAME) . '?= <' . FROM_EMAIL . '>',
+            'To: <' . $to . '>',
+            'Subject: =?UTF-8?B?' . base64_encode($subject) . '?=',
+            'Message-ID: <' . bin2hex(random_bytes(8)) . '@trasteverecarni.it>',
+            'MIME-Version: 1.0',
+            'Content-Type: text/html; charset=UTF-8',
+            'Content-Transfer-Encoding: base64',
+        ];
+        if ($replyTo) $headers[] = 'Reply-To: ' . $replyTo;
+        $cmd(implode("\r\n", $headers) . "\r\n\r\n" . chunk_split(base64_encode($html)) . "\r\n.", '250');
+        fwrite($fp, "QUIT\r\n");
+        fclose($fp);
+        return true;
+    } catch (Throwable $e) {
+        error_log("SMTP verso $to: " . $e->getMessage());
+        fclose($fp);
+        return false;
+    }
+}
+
 function send_mail(string $to, string $subject, string $html, string $replyTo = ''): void {
+    if (defined('SMTP_PASS') && SMTP_PASS !== '' && strpos(SMTP_PASS, 'INSERISCI') === false
+        && smtp_send($to, $subject, $html, $replyTo)) return;
     $headers = [
         'MIME-Version: 1.0',
         'Content-Type: text/html; charset=UTF-8',
