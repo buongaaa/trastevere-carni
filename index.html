@@ -1,0 +1,1404 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Trastevere Carni — Macelleria a Roma</title>
+<link rel="icon" href="img/logo.png">
+<meta name="description" content="Trastevere Carni, macelleria di famiglia in Via Guglielmo Mengarini 67, Roma. Carni di prima scelta, consigli di cottura e consegna a domicilio.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,800;1,9..144,400;1,9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#15100e; --bg2:#1d1613; --card:#241b17; --line:#3a2d27;
+  --cream:#f3ead8; --muted:#b9a993; --red:#c8372d; --red2:#e0503f; --gold:#c9a25a;
+  --radius:18px; --gutter:clamp(16px,4vw,48px);
+  --serif:"Fraunces",Georgia,serif; --sans:"Inter",system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--cream);font-family:var(--sans);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:100;opacity:.07;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+a{color:inherit}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+.wrap{max-width:1200px;margin:0 auto;padding:0 var(--gutter)}
+.eyebrow{font-size:.75rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:600}
+h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.05;letter-spacing:-.01em}
+h2{font-size:clamp(2rem,5vw,3.6rem);margin:.4em 0 .5em}
+.lead{color:var(--muted);font-size:clamp(1rem,1.6vw,1.15rem);max-width:56ch}
+section{padding:clamp(72px,10vw,130px) 0;position:relative}
+
+.btn{display:inline-flex;align-items:center;gap:.6em;padding:.95em 1.5em;border-radius:999px;font-weight:600;text-decoration:none;transition:transform .2s,background .2s,box-shadow .2s;white-space:nowrap}
+.btn-red{background:var(--red);color:#fff;box-shadow:0 10px 30px -10px rgba(200,55,45,.7)}
+.btn-red:hover{background:var(--red2);transform:translateY(-2px)}
+.btn-ghost{border:1px solid var(--line);background:rgba(255,255,255,.02)}
+.btn-ghost:hover{border-color:var(--gold);transform:translateY(-2px)}
+.btn svg{width:18px;height:18px}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;transition:background .3s,backdrop-filter .3s,border-color .3s;border-bottom:1px solid transparent}
+nav.scrolled{background:rgba(21,16,14,.82);backdrop-filter:blur(14px);border-color:var(--line)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;height:72px;gap:16px}
+.logo{font-family:var(--serif);font-size:1.35rem;font-weight:800;text-decoration:none;display:flex;align-items:center;gap:.5em}
+.logo i{font-style:italic;font-weight:400;color:var(--gold)}
+.nav-links{display:flex;gap:24px;font-size:.92rem;color:var(--muted);white-space:nowrap}
+.nav-links a{text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--cream)}
+.status{white-space:nowrap;display:inline-flex;align-items:center;gap:.5em;font-size:.8rem;padding:.4em .9em;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.dot{width:8px;height:8px;border-radius:50%;background:#777}
+.status.open .dot{background:#4ade80;box-shadow:0 0 0 0 rgba(74,222,128,.6);animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 8px rgba(74,222,128,0)}100%{box-shadow:0 0 0 0 rgba(74,222,128,0)}}
+.cart-btn{position:relative;width:46px;height:46px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;transition:border-color .2s}
+.cart-btn:hover{border-color:var(--gold)}
+.cart-btn svg{width:20px;height:20px}
+.cart-count{position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;font-size:.7rem;font-weight:700;min-width:20px;height:20px;border-radius:10px;display:grid;place-items:center;padding:0 5px;transform:scale(0);transition:transform .3s cubic-bezier(.3,1.6,.5,1)}
+.cart-count.on{transform:scale(1)}
+.bump{animation:bump .45s}
+@keyframes bump{40%{transform:scale(1.25)}}
+
+/* HERO */
+.hero{min-height:100svh;display:flex;align-items:center;padding-top:110px;overflow:hidden}
+.spot{position:absolute;inset:0;background:radial-gradient(600px circle at var(--mx,70%) var(--my,40%),rgba(200,55,45,.22),transparent 60%);pointer-events:none;transition:background .1s}
+.hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:48px;align-items:center;position:relative}
+.hero h1{font-size:clamp(2.8rem,8.5vw,7rem);font-weight:800}
+.hero h1 em{font-style:italic;font-weight:400;color:var(--gold)}
+.rot{display:inline-block;color:var(--red2);font-style:italic;font-weight:600;transition:opacity .4s,transform .4s}
+.rot.out{opacity:0;transform:translateY(.25em)}
+.hero .lead{margin:28px 0 36px}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
+.badge-card{background:linear-gradient(160deg,var(--card),var(--bg2));border:1px solid var(--line);border-radius:28px;padding:32px;position:relative;transform:rotate(2deg);transition:transform .5s}
+.badge-card:hover{transform:rotate(0) scale(1.02)}
+.big-rating{font-family:var(--serif);font-size:5.5rem;font-weight:800;line-height:1}
+.stars{color:var(--gold);letter-spacing:3px;font-size:1.3rem}
+.badge-card blockquote{font-family:var(--serif);font-style:italic;font-size:1.15rem;margin-top:20px;padding-top:20px;border-top:1px dashed var(--line);color:var(--cream)}
+.badge-card cite{display:block;font-style:normal;font-family:var(--sans);font-size:.8rem;color:var(--muted);margin-top:8px}
+.stamp{position:absolute;top:-28px;right:-18px;width:96px;height:96px;animation:spin 18s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* MARQUEE */
+.marquee{border-block:1px solid var(--line);overflow:hidden;padding:18px 0;background:var(--bg2)}
+.track{display:flex;gap:48px;width:max-content;animation:scroll 32s linear infinite;font-family:var(--serif);font-size:clamp(1.2rem,2.4vw,1.8rem);font-style:italic;color:var(--muted)}
+.track span::after{content:"✦";margin-left:48px;color:var(--red);font-style:normal}
+@keyframes scroll{to{transform:translateX(-50%)}}
+
+/* CUTS */
+.cuts-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:40px;align-items:center;margin-top:40px}
+.cow-box{background:var(--bg2);border:1px solid var(--line);border-radius:28px;padding:clamp(16px,3vw,36px);position:relative}
+.cow-box .hint{position:absolute;top:18px;left:22px;font-size:.78rem;color:var(--muted);display:flex;gap:.5em;align-items:center}
+#cow{width:100%;height:auto;display:block;margin-top:18px}
+#cow .cut{fill:#2c211c;stroke:var(--bg);stroke-width:3;stroke-linejoin:round;cursor:pointer;transition:fill .25s}
+#cow .cut:hover{fill:#5a2a22}
+#cow .cut.active{fill:var(--red)}
+#cow .deco{fill:#2c211c;stroke:var(--bg);stroke-width:3;stroke-linejoin:round}
+#cow text{font-family:var(--sans);font-size:11px;fill:var(--muted);pointer-events:none;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+#cow .cut.active + text, #cow text.on{fill:#fff}
+.cut-panel{background:var(--card);border:1px solid var(--line);border-radius:28px;padding:32px;min-height:420px;display:flex;flex-direction:column}
+.cut-panel h3{font-size:2.4rem;margin:.25em 0 .4em}
+.cut-panel p{color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0}
+.chip{font-size:.78rem;padding:.4em .85em;border-radius:999px;background:rgba(201,162,90,.12);color:var(--gold);border:1px solid rgba(201,162,90,.25)}
+.dish{margin-top:6px;padding:16px;border-radius:14px;background:rgba(255,255,255,.03);border:1px solid var(--line);font-size:.92rem}
+.dish b{color:var(--cream);font-family:var(--serif);font-weight:600;font-size:1.05rem}
+.cut-panel .btn{margin-top:auto;align-self:flex-start}
+.fade-swap{animation:swap .4s ease}
+@keyframes swap{from{opacity:0;transform:translateY(10px)}}
+.cut-list{display:none}
+
+/* CALC */
+.calc{display:grid;grid-template-columns:.9fr 1.1fr;gap:28px;margin-top:40px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:28px;padding:clamp(22px,3vw,36px)}
+.field{margin-bottom:28px}
+.field label,.field .lbl{display:flex;justify-content:space-between;font-weight:600;margin-bottom:12px;font-size:.95rem}
+.field output{font-family:var(--serif);font-size:1.6rem;color:var(--gold);line-height:1}
+input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:6px;border-radius:3px;background:linear-gradient(90deg,var(--red) var(--p,30%),var(--line) var(--p,30%));outline:none}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:50%;background:var(--cream);border:5px solid var(--red);cursor:grab}
+input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--cream);border:5px solid var(--red);cursor:grab}
+.seg{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:6px;background:var(--bg);padding:5px;border-radius:14px;border:1px solid var(--line)}
+.seg button{padding:.7em .4em;border-radius:10px;font-size:.85rem;color:var(--muted);transition:background .2s,color .2s}
+.seg button.on{background:var(--cream);color:var(--bg);font-weight:600}
+.result-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;border-bottom:1px dashed var(--line);padding-bottom:20px;margin-bottom:20px;flex-wrap:wrap}
+.total{font-family:var(--serif);font-size:clamp(3rem,7vw,4.6rem);font-weight:800;line-height:.9}
+.total small{font-size:.35em;color:var(--muted);font-weight:400}
+.rows{display:flex;flex-direction:column;gap:14px}
+.row{display:grid;grid-template-columns:1fr auto;gap:4px 16px}
+.row .bar{grid-column:1/-1;height:8px;border-radius:4px;background:var(--line);overflow:hidden}
+.row .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--red),var(--gold));border-radius:4px;transition:width .6s cubic-bezier(.2,.8,.2,1)}
+.row b{font-family:var(--serif);font-weight:600}
+.note{font-size:.8rem;color:var(--muted);margin-top:20px}
+
+/* STORY */
+.story{background:var(--cream);color:var(--bg)}
+.story .eyebrow{color:var(--red)}
+.story .lead{color:#5a4a3e}
+.gens{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px;position:relative}
+.gen{border-top:3px solid var(--bg);padding-top:24px}
+.gen .n{font-family:var(--serif);font-size:4rem;font-weight:800;line-height:1;color:var(--red)}
+.gen h3{font-size:1.6rem;margin:.3em 0}
+.gen p{color:#5a4a3e}
+.pullquote{font-family:var(--serif);font-style:italic;font-size:clamp(1.6rem,3.6vw,2.8rem);line-height:1.25;margin-top:72px;max-width:24ch}
+.pullquote cite{display:block;font-family:var(--sans);font-style:normal;font-size:.9rem;margin-top:16px;color:#5a4a3e}
+
+/* SERVICES */
+.services{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:40px}
+.svc{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:28px;transition:transform .3s,border-color .3s}
+.svc:hover{transform:translateY(-6px);border-color:var(--gold)}
+.svc .ic{width:48px;height:48px;border-radius:14px;background:rgba(200,55,45,.15);display:grid;place-items:center;color:var(--red2);margin-bottom:20px}
+.svc .ic svg{width:24px;height:24px}
+.svc h3{font-size:1.35rem;margin-bottom:.4em}
+.svc p{color:var(--muted);font-size:.92rem}
+
+/* REVIEWS */
+.rev-top{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
+.rack{display:grid;grid-template-columns:repeat(6,1fr);margin-top:56px;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.hang{position:relative;display:flex;flex-direction:column;align-items:center;padding-top:10px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.hang::before{content:"";position:absolute;top:0;left:0;right:0;height:12px;background:linear-gradient(#f2eee8,#9a938b 55%,#55504b);box-shadow:0 8px 14px rgba(0,0,0,.45);z-index:2}
+.hang:nth-child(6n+1)::before{border-radius:6px 0 0 6px;left:-8px}
+.hang:nth-child(6n)::before{border-radius:0 6px 6px 0;right:-8px}
+.piece{width:min(150px,92%);transform-origin:50% 0;will-change:transform;filter:drop-shadow(0 22px 16px rgba(0,0,0,.5))}
+.piece::before{content:"";display:block;width:3px;height:var(--l,10px);margin:0 auto;background:linear-gradient(90deg,#8d867e,#e2ddd6,#8d867e)}
+.piece img{width:100%;height:auto;display:block;margin-top:-4px;pointer-events:none}
+.tag{width:74%;margin:-14px auto 0;transform-origin:50% 0;position:relative;background:#dcc59c;color:#3a2a1c;border-radius:3px 3px 8px 8px;padding:12px 4px 8px;text-align:center;font-size:.7rem;font-weight:700;line-height:1.35;transition:background .25s,color .25s}
+.tag::before{content:"";position:absolute;top:4px;left:50%;width:6px;height:6px;margin-left:-3px;border-radius:50%;background:var(--bg)}
+.tag .s{color:#a5462f;letter-spacing:1px;font-size:.62rem}
+.hang.sel .tag{background:var(--red);color:#fff}
+.hang.sel .tag .s{color:#ffd9a8}
+.quote-box{margin-top:36px;background:var(--card);border:1px solid var(--line);border-radius:28px;padding:clamp(24px,4vw,44px);position:relative;overflow:hidden}
+.quote-box::before{content:"“";position:absolute;right:24px;top:-30px;font-family:var(--serif);font-size:12rem;color:var(--red);opacity:.18;line-height:1}
+.quote-box p{font-family:var(--serif);font-size:clamp(1.25rem,2.6vw,1.9rem);line-height:1.35;margin:14px 0 22px;max-width:46ch}
+.quote-box .who{display:flex;align-items:center;gap:12px;font-size:.9rem}
+.qcount{position:absolute;right:28px;bottom:24px;font-size:.8rem;color:var(--muted)}
+.live{display:inline-flex;align-items:center;gap:.6em;font-size:.82rem;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:.55em 1em}
+.live .dot{background:var(--red);animation:pulse 2s infinite}
+.rev p{font-family:var(--serif);font-size:1.15rem;line-height:1.5;margin:14px 0 24px}
+.rev .who{margin-top:auto;display:flex;align-items:center;gap:12px;font-size:.88rem}
+.av{width:40px;height:40px;border-radius:50%;background:var(--red);display:grid;place-items:center;font-weight:700;color:#fff}
+.who small{display:block;color:var(--muted)}
+.arrows{display:flex;gap:10px}
+.arrows button{width:48px;height:48px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center}
+.arrows button:hover{border-color:var(--gold)}
+
+/* CONTACT */
+.contact{display:grid;grid-template-columns:.9fr 1.1fr;gap:28px;margin-top:40px}
+.info-list{display:flex;flex-direction:column;gap:22px}
+.info-list div{display:flex;gap:16px}
+.info-list svg{width:22px;height:22px;flex:none;color:var(--gold);margin-top:3px}
+.info-list b{display:block;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.info-list a{text-decoration:none;font-size:1.1rem}
+.hours{width:100%;border-collapse:collapse;font-size:.92rem;margin-top:6px}
+.hours td{padding:6px 0;border-bottom:1px solid var(--line)}
+.hours td:last-child{text-align:right;color:var(--muted)}
+.hours tr.today td{color:var(--cream);font-weight:600}
+.map{border-radius:28px;overflow:hidden;border:1px solid var(--line);min-height:420px}
+.map iframe{width:100%;height:100%;min-height:420px;border:0;filter:grayscale(1) invert(.92) contrast(.9) sepia(.25)}
+
+footer{border-top:1px solid var(--line);padding:40px 0 120px;color:var(--muted);font-size:.85rem}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+/* DRAWER */
+.scrim{position:fixed;inset:0;background:rgba(0,0,0,.55);backdrop-filter:blur(3px);z-index:80;opacity:0;pointer-events:none;transition:opacity .3s}
+.scrim.on{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(440px,100%);background:var(--bg2);border-left:1px solid var(--line);z-index:90;transform:translateX(100%);transition:transform .45s cubic-bezier(.2,.8,.2,1);display:flex;flex-direction:column}
+.drawer.on{transform:none}
+.d-head{display:flex;justify-content:space-between;align-items:center;padding:22px 24px;border-bottom:1px solid var(--line)}
+.d-head h3{font-size:1.6rem}
+.d-body{flex:1;overflow-y:auto;padding:20px 24px}
+.empty{text-align:center;color:var(--muted);padding:48px 0}
+.empty .big{font-size:3rem}
+.item{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 0;border-bottom:1px solid var(--line)}
+.item .nm{font-weight:600}
+.qty{display:flex;align-items:center;gap:6px;flex:none}
+.qty button{width:30px;height:30px;border-radius:50%;border:1px solid var(--line)}
+.qty span{min-width:62px;text-align:center;font-variant-numeric:tabular-nums;font-size:.9rem}
+.rm{color:var(--muted);font-size:.78rem;text-decoration:underline}
+.form{margin-top:24px;display:flex;flex-direction:column;gap:12px}
+.form input,.form textarea{width:100%;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:12px 14px;color:var(--cream);font:inherit;font-size:16px}
+.form input:focus,.form textarea:focus{outline:none;border-color:var(--gold)}
+.d-foot{padding:18px 24px calc(18px + env(safe-area-inset-bottom));border-top:1px solid var(--line);display:flex;flex-direction:column;gap:10px}
+.d-foot .btn{justify-content:center}
+
+.toast{position:fixed;left:50%;bottom:100px;transform:translate(-50%,20px);background:var(--cream);color:var(--bg);padding:.8em 1.3em;border-radius:999px;font-weight:600;font-size:.9rem;z-index:95;opacity:0;pointer-events:none;transition:all .35s;white-space:nowrap}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+
+.mbar{display:none}
+
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.8,.2,1)}
+.reveal.in{opacity:1;transform:none}
+
+@media (max-width:1100px){ .nav-links{display:none} }
+@media (max-width:960px){
+  .hero-grid,.cuts-grid,.calc,.contact{grid-template-columns:1fr}
+  .badge-card{transform:none;max-width:440px}
+  .services{grid-template-columns:1fr 1fr}
+  .cut-panel{min-height:0}
+}
+@media (max-width:640px){
+  .status .lbl-long{display:none}
+  .services,.gens{grid-template-columns:1fr}
+  .gens{gap:36px}
+  .hero-ctas .btn{flex:1;justify-content:center}
+  .stamp{width:76px;height:76px;top:-22px;right:-6px}
+  .rack{grid-template-columns:repeat(3,1fr);row-gap:30px}
+  .hang:nth-child(n)::before{border-radius:0;left:0;right:0}
+  .hang:nth-child(3n+1)::before{border-radius:6px 0 0 6px;left:-6px}
+  .hang:nth-child(3n)::before{border-radius:0 6px 6px 0;right:-6px}
+  .qcount{position:static;margin-top:16px}
+  #cow text{font-size:13px}
+  .mbar{display:grid;grid-template-columns:1fr 1.3fr 1fr;gap:8px;position:fixed;left:10px;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:60;background:rgba(36,27,23,.92);backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:20px;padding:8px}
+  .mbar a,.mbar button{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:.72rem;padding:8px 4px;border-radius:14px;text-decoration:none;color:var(--muted)}
+  .mbar svg{width:20px;height:20px}
+  .mbar .main{background:var(--red);color:#fff;font-weight:600}
+  .toast{bottom:96px}
+  .drawer{top:auto;height:92svh;width:100%;border-left:0;border-top:1px solid var(--line);border-radius:24px 24px 0 0;transform:translateY(100%)}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .reveal{opacity:1;transform:none}
+}
+/* CHECKOUT */
+.steps{display:flex;gap:6px;padding:14px 24px 0;list-style:none;counter-reset:s}
+.steps li{flex:1;font-size:.72rem;color:var(--muted);counter-increment:s;padding-top:10px;border-top:3px solid var(--line);transition:border-color .3s,color .3s}
+.steps li::before{content:counter(s)". "}
+.steps li.on{border-color:var(--red);color:var(--cream)}
+.steps li.cur{font-weight:700}
+.pane{display:none;flex-direction:column;gap:10px}
+.pane.on{display:flex;animation:swap .35s ease}
+.pane input:not([type=checkbox]):not([type=radio]),.pane textarea{width:100%;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:12px 14px;color:var(--cream);font:inherit;font-size:16px}
+.pane input:focus,.pane textarea:focus{outline:none;border-color:var(--gold)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.two[hidden],#addrBox[hidden],.weight-note[hidden]{display:none}
+#addrBox{display:flex;flex-direction:column;gap:10px}
+.lbl-s{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-top:12px}
+.err{border-color:var(--red2)!important;box-shadow:0 0 0 3px rgba(224,80,63,.2)}
+.msg{font-size:.82rem;min-height:1em}.msg.ok,.sl.ok{color:#4ade80}.msg.ko{color:var(--red2)}
+.coupon{display:flex;gap:8px;margin-top:16px}.coupon .btn{padding:.7em 1.1em}
+.days{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+.days button{flex:none;min-width:66px;padding:10px 8px;border:1px solid var(--line);border-radius:14px;text-align:center;font-size:.74rem;line-height:1.3;color:var(--muted)}
+.days button b{display:block;font-size:1.15rem;color:var(--cream);font-family:var(--serif)}
+.days button.on,.slots button.on{background:var(--cream);color:var(--bg);border-color:var(--cream)}
+.days button.on b{color:var(--bg)}
+.slots{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.slots button{padding:10px 4px;border:1px solid var(--line);border-radius:12px;font-size:.82rem;transition:border-color .2s}
+.slots button:hover,.days button:hover{border-color:var(--gold)}
+.pays{display:flex;flex-direction:column;gap:8px}
+.pay{display:flex;align-items:center;gap:12px;padding:14px;border:1px solid var(--line);border-radius:14px;cursor:pointer;transition:border-color .2s,background .2s}
+.pay:has(input:checked){border-color:var(--gold);background:rgba(201,162,90,.08)}
+.pay input{accent-color:var(--red);width:18px;height:18px;flex:none}
+.pay b{display:block;font-size:.92rem}.pay small{color:var(--muted);font-size:.76rem}
+.pay .logos{margin-left:auto;font-size:.58rem;color:var(--muted);letter-spacing:.06em;text-align:right;line-height:1.5}
+.weight-note{display:flex;gap:10px;font-size:.8rem;color:var(--muted);background:rgba(255,255,255,.03);border:1px dashed var(--line);border-radius:12px;padding:12px;margin:6px 0}
+.weight-note b{color:var(--cream)}
+.check{display:flex;gap:10px;align-items:flex-start;font-size:.85rem;color:var(--muted);cursor:pointer}
+.check input{accent-color:var(--red);width:18px;height:18px;margin-top:2px;flex:none}
+.check a{color:var(--gold)}
+.summary{margin-top:10px;border-top:1px solid var(--line);padding-top:12px;display:flex;flex-direction:column;gap:6px;font-size:.9rem}
+.sl{display:flex;justify-content:space-between;gap:10px}
+.sl.t{font-weight:700;font-size:1.05rem;padding-top:8px;border-top:1px dashed var(--line)}
+.small{font-size:.8rem;color:var(--muted)}
+.item .r{display:flex;flex-direction:column;align-items:flex-end;gap:4px}
+.item .pr{font-family:var(--serif);font-weight:600}
+.totline{display:flex;justify-content:space-between;align-items:baseline}
+.totline span{color:var(--muted);font-size:.85rem}
+.totline b{font-family:var(--serif);font-size:1.5rem}
+.foot-btns{display:flex;gap:8px}.foot-btns .btn{flex:1;justify-content:center}.foot-btns .btn-ghost{flex:0 0 auto}
+.foot-btns .btn[hidden]{display:none}
+.secure{display:flex;gap:6px;align-items:center;justify-content:center;font-size:.7rem;color:var(--muted);text-align:center}
+.d-foot[hidden],.steps[hidden]{display:none}
+.proc{position:absolute;inset:0;background:rgba(29,22,19,.97);display:none;flex-direction:column;align-items:center;justify-content:center;gap:14px;z-index:5;text-align:center;padding:24px;border-radius:inherit}
+.proc.on{display:flex}
+.spin{width:48px;height:48px;border-radius:50%;border:4px solid var(--line);border-top-color:var(--red);animation:spin .8s linear infinite}
+.done{text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px;padding:10px 0 20px}
+.done h3{font-size:2rem}
+.tick{width:72px;height:72px}
+.tick circle{fill:none;stroke:#4ade80;stroke-width:3;stroke-dasharray:151;stroke-dashoffset:151;animation:draw .6s forwards}
+.tick path{fill:none;stroke:#4ade80;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:40;stroke-dashoffset:40;animation:draw .4s .5s forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.demo{font-size:.72rem;background:rgba(201,162,90,.15);color:var(--gold);padding:.3em .8em;border-radius:999px}
+.otrack{display:flex;width:100%;list-style:none;margin:10px 0;gap:6px}
+.otrack li{flex:1;font-size:.72rem;color:var(--muted);border-top:3px solid var(--line);padding-top:8px}
+.otrack li.ok{border-color:#4ade80;color:var(--cream)}
+.done .summary{width:100%;text-align:left}
+.done-btns{display:flex;flex-direction:column;gap:8px;width:100%;margin-top:10px}.done-btns .btn{justify-content:center}
+.legal{display:flex;gap:14px;flex-wrap:wrap;margin-top:8px}.legal a{color:var(--muted)}
+/* FOTO */
+.logo-img{width:44px;height:44px;border-radius:50%;flex:none;box-shadow:0 0 0 2px rgba(255,255,255,.08)}
+.hero-visual{position:relative;margin-bottom:30px}
+.hero-photo{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:28px;box-shadow:0 40px 80px -30px rgba(0,0,0,.8)}
+.hero-visual .badge-card{position:absolute;left:-48px;bottom:-30px;width:min(300px,80%);padding:22px 24px;background:rgba(36,27,23,.9);backdrop-filter:blur(10px)}
+.hero-visual .big-rating{font-size:3.6rem}
+.hero-visual .badge-card blockquote{font-size:1rem;margin-top:14px;padding-top:14px}
+.gallery{columns:3 280px;column-gap:16px;margin-top:40px}
+.g{break-inside:avoid;margin:0 0 16px;position:relative;border-radius:20px;overflow:hidden;cursor:zoom-in;border:1px solid var(--line);background:var(--card)}
+.g img{display:block;width:100%;height:auto;transition:transform .7s cubic-bezier(.2,.8,.2,1)}
+.g:hover img,.g:focus-visible img{transform:scale(1.06)}
+.g:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.g figcaption{position:absolute;left:0;right:0;bottom:0;padding:48px 16px 14px;background:linear-gradient(transparent,rgba(0,0,0,.78));font-weight:600;font-size:.9rem}
+.lb{position:fixed;inset:0;z-index:120;background:rgba(10,7,6,.95);display:flex;align-items:center;justify-content:center;padding:24px 72px}
+.lb[hidden]{display:none}
+.lb figure{margin:0;max-width:min(1200px,100%);text-align:center}
+.lb img{max-width:100%;max-height:82svh;border-radius:16px;display:block;margin:0 auto;animation:swap .3s ease}
+.lb figcaption{margin-top:12px;color:var(--muted);font-size:.9rem}
+.lb button{position:absolute;color:var(--cream);font-size:2.2rem;width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,.08);display:grid;place-items:center;line-height:1}
+.lb button:hover{background:rgba(255,255,255,.16)}
+.lb-x{top:16px;right:16px}.lb-p{left:12px;top:50%;transform:translateY(-50%)}.lb-n{right:12px;top:50%;transform:translateY(-50%)}
+.prep-head{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+.prep-hero{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:28px;transform:rotate(-2deg);box-shadow:0 30px 60px -20px rgba(0,0,0,.7)}
+.prods{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:56px}
+.prod{background:var(--card);border:1px solid var(--line);border-radius:22px;overflow:hidden;display:flex;flex-direction:column;transition:transform .3s,border-color .3s}
+.prod:hover{transform:translateY(-6px);border-color:var(--gold)}
+.prod .ph{aspect-ratio:4/3;overflow:hidden}
+.prod .phi{width:100%;height:100%;background-repeat:no-repeat;transition:transform .7s cubic-bezier(.2,.8,.2,1)}
+.prod:hover .phi{transform:scale(1.08)}
+.prod .bd{padding:18px 20px 20px;display:flex;flex-direction:column;gap:6px;flex:1}
+.prod h3{font-size:1.35rem}
+.prod .pp{color:var(--gold);font-weight:600;font-size:.95rem}
+.prod .small{margin-bottom:12px}
+.prod .btn{margin-top:auto;align-self:flex-start;padding:.75em 1.2em;font-size:.86rem}
+.story-photo{display:block;width:100%;aspect-ratio:21/9;object-fit:cover;border-radius:24px;margin-top:40px}
+.deliv{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;background:var(--cream);color:var(--bg);border-radius:32px;padding:clamp(20px,4vw,48px)}
+.deliv img{width:100%;border-radius:20px;display:block}
+.deliv .eyebrow{color:var(--red)}
+.deliv h2{font-size:clamp(2rem,4.4vw,3.2rem)}
+.deliv .lead{color:#5a4a3e;margin-bottom:24px}
+.deliv a{color:var(--red);font-weight:600}
+@media (max-width:960px){
+  .hero-photo{aspect-ratio:4/3}
+  .hero-visual{margin-bottom:70px}
+  .hero-visual .badge-card{left:12px;bottom:-50px}
+  .prep-head,.deliv{grid-template-columns:1fr}
+  .prods{grid-template-columns:1fr 1fr}
+}
+@media (max-width:640px){
+  .prods{grid-template-columns:1fr}
+  .gallery{columns:2 150px;column-gap:10px}
+  .g{margin-bottom:10px;border-radius:14px}
+  .g figcaption{font-size:.75rem;padding:32px 10px 10px}
+  .story-photo{aspect-ratio:4/3}
+  .lb{padding:16px}
+  .lb-p,.lb-n{top:auto;bottom:20px;transform:none}
+  .logo-img{width:38px;height:38px}
+  .logo{font-size:1.15rem}
+}
+/* PACCHI */
+.packs-sec{background:radial-gradient(ellipse at 20% 0%,rgba(200,55,45,.22),transparent 60%),linear-gradient(180deg,#2a1311,#1a0f0d);border-block:1px solid var(--line)}
+.packs-top{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap}
+.free48{display:flex;align-items:center;gap:14px;border:1px solid rgba(201,162,90,.4);border-radius:20px;padding:14px 20px;background:rgba(201,162,90,.08)}
+.free48 b{font-family:var(--serif);font-size:2.6rem;line-height:1;color:var(--gold)}
+.free48 span{font-size:.85rem;line-height:1.3;color:var(--cream);font-weight:600}
+.ptabs{display:inline-grid;grid-auto-flow:column;gap:6px;background:rgba(0,0,0,.3);padding:6px;border-radius:999px;border:1px solid var(--line);margin-top:40px}
+.ptabs button{padding:.75em 1.6em;border-radius:999px;font-weight:600;color:var(--muted);transition:background .25s,color .25s}
+.ptabs button.on{background:var(--red);color:#fff}
+.ptag{color:var(--muted);margin:16px 0 28px;font-family:var(--serif);font-style:italic;font-size:1.15rem}
+.packs{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.packs[data-n="2"]{grid-template-columns:repeat(2,minmax(0,420px))}
+.pack{background:linear-gradient(170deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.1);border-radius:26px;padding:26px;display:flex;flex-direction:column;gap:18px;transition:transform .3s,border-color .3s,box-shadow .3s}
+.pack:hover{transform:translateY(-6px);border-color:var(--gold);box-shadow:0 30px 60px -30px rgba(0,0,0,.8)}
+.pack header .eyebrow{font-size:.68rem}
+.pack h3{font-size:1.9rem;margin:.2em 0 .25em}
+.psum{font-size:.82rem;color:var(--muted)}
+.pack ul{list-style:none;display:flex;flex-direction:column;border-top:1px dashed rgba(255,255,255,.14)}
+.pack li{display:grid;grid-template-columns:62px 1fr;gap:10px;padding:9px 0;border-bottom:1px dashed rgba(255,255,255,.1);font-size:.93rem}
+.pack li b{color:var(--gold);font-variant-numeric:tabular-nums;font-weight:700}
+.pack li em{color:var(--muted);font-style:normal;font-size:.85em}
+.pack footer{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.pprice{font-family:var(--serif);font-size:2.4rem;font-weight:800;line-height:1;color:#fff}
+.packs-info{display:flex;justify-content:space-between;gap:12px 24px;flex-wrap:wrap;margin-top:28px;padding-top:20px;border-top:1px solid var(--line);font-size:.9rem;color:var(--muted)}
+.packs-info span:first-child{color:var(--cream);font-weight:600}
+.packs-info a{color:var(--gold);text-decoration:none}
+@media (max-width:960px){ .packs,.packs[data-n="2"]{grid-template-columns:1fr 1fr} }
+@media (max-width:640px){
+  .packs,.packs[data-n="2"]{grid-template-columns:1fr}
+  .ptabs{display:grid;width:100%}
+  .ptabs button{padding:.75em .5em}
+  .pprice{font-size:2rem}
+}
+/* WHATSAPP */
+.btn-wa{background:#25D366;color:#08351a;font-weight:700}
+.btn-wa:hover{background:#3ee27e;transform:translateY(-2px)}
+.btn-wa svg{width:18px;height:18px}
+.btn-icon{padding:.75em;aspect-ratio:1}
+.pbtns{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto}
+.pack footer{flex-direction:column;align-items:flex-start}
+.pack .pbtns{width:100%}
+.pack .pbtns .btn{flex:1;justify-content:center}
+.prod .pbtns .btn-red{flex:1;justify-content:center}
+.wa-float{position:fixed;right:calc(22px + env(safe-area-inset-right,0px));bottom:calc(22px + env(safe-area-inset-bottom,0px));z-index:60;width:60px;height:60px;border-radius:50%;background:#25D366;color:#fff;display:grid;place-items:center;box-shadow:0 14px 34px -10px rgba(37,211,102,.7);transition:transform .2s}
+.wa-float:hover{transform:scale(1.08)}
+.wa-float svg{width:32px;height:32px}
+.mbar .wa{color:#25D366}
+.wa-link{display:inline-flex;align-items:center;gap:8px;color:#25D366;font-weight:600;font-size:.88rem;align-self:flex-start;text-decoration:underline;text-underline-offset:3px}
+.wa-link[hidden]{display:none}
+.wa-link svg{width:18px;height:18px;flex:none}
+.packs-info a[href*="wa.me"]{color:#25D366}
+@media (max-width:640px){ .wa-float{display:none} .hero-ctas .btn-wa{flex-basis:100%} }
+.social{display:flex;gap:10px;margin-top:14px}
+.social a{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;color:var(--cream);transition:border-color .2s,color .2s}
+.social a:hover{border-color:var(--gold);color:var(--gold)}
+.social svg{width:18px;height:18px}
+/* TELEFONI STRETTI */
+.contact>*,.calc>*,.cuts-grid>*,.prep-head>*,.deliv>*{min-width:0}
+@media (max-width:480px){
+  .nav-in{gap:8px}
+  .nav-in>div:last-child{gap:8px!important}
+  .logo{font-size:1.02rem;gap:.4em}
+  .logo-img{width:34px!important;height:34px!important}
+  .status{padding:.35em .7em;font-size:.72rem}
+  .cart-btn{width:40px;height:40px}
+}
+@media (max-width:360px){ .logo i{display:none} }
+@media (max-width:640px){ body.d-open .toast{bottom:auto;top:calc(16px + env(safe-area-inset-top,0px))} }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="wrap nav-in">
+    <a href="#top" class="logo"><img src="img/logo.png" alt="" class="logo-img">Trastevere <i>Carni</i></a>
+    <div class="nav-links">
+      <a href="#tagli">I tagli</a>
+      <a href="#pacchi">Pacchi</a>
+      <a href="#grigliata">Grigliata</a>
+      <a href="#preparati">Preparati</a>
+      <a href="#storia">Storia</a>
+      <a href="#recensioni">Recensioni</a>
+      <a href="#contatti">Contatti</a>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px">
+      <span class="status" id="status"><span class="dot"></span><span id="statusTxt">…</span></span>
+      <button class="cart-btn" id="cartBtn" aria-label="Apri il tuo ordine">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 7h12l-1 13H7L6 7Z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="spot" id="spot"></div>
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow reveal">Macelleria di famiglia · Roma</div>
+      <h1 class="reveal">La carne giusta,<br><em>scelta</em> con te.<br><span class="rot" id="rot">Costata</span></h1>
+      <p class="lead reveal">Carni di prima scelta, preparati pronti e consigli su misura. Ti accompagniamo nella scelta del taglio più adatto ai tuoi gusti — e te lo portiamo a casa.</p>
+      <div class="hero-ctas reveal">
+        <a href="#tagli" class="btn btn-red">Esplora i tagli
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a href="tel:+390645556793" class="btn btn-ghost">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>
+          06 4555 6793</a>
+        <a href="https://wa.me/393389030246?text=Ciao%20Trastevere%20Carni%2C%20vorrei%20un%27informazione" class="btn btn-wa" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3Z"/></svg>WhatsApp</a>
+      </div>
+    </div>
+    <div class="hero-visual reveal"><img class="hero-photo" src="img/foto/vetrina-bovino.jpg" alt="Il banco con i tagli di bovino adulto e vitello">
+    <div class="badge-card">
+      <svg class="stamp" viewBox="0 0 100 100" aria-hidden="true">
+        <defs><path id="c" d="M50 50m-38 0a38 38 0 1 1 76 0a38 38 0 1 1-76 0"/></defs>
+        <circle cx="50" cy="50" r="49" fill="#c8372d"/>
+        <text font-size="10.5" font-weight="700" fill="#fff" letter-spacing="2.2" font-family="Inter"><textPath href="#c">CONSEGNA A DOMICILIO · ROMA ·</textPath></text>
+        <path d="M38 52h18l6 6h-24z M42 46h12v6H42z" fill="#fff"/>
+      </svg>
+      <div class="eyebrow">Su Google</div>
+      <div style="display:flex;align-items:flex-end;gap:16px;margin-top:8px">
+        <div class="big-rating">4,9</div>
+        <div style="padding-bottom:10px"><div class="stars">★★★★★</div><div style="color:var(--muted);font-size:.85rem">34 recensioni</div></div>
+      </div>
+      <blockquote>“Peccato si possano mettere solo 5 stelle, ne meriterebbero di più.”<cite>— Alessandro, Local Guide</cite></blockquote>
+    </div>
+    </div>
+  </div>
+</header>
+
+<div class="marquee" aria-hidden="true">
+  <div class="track">
+    <span>Carne di prima scelta</span><span>Tagli su misura</span><span>Consigli di cottura</span><span>Preparati pronti</span><span>Consegna a domicilio</span><span>Tre generazioni di clienti</span>
+    <span>Carne di prima scelta</span><span>Tagli su misura</span><span>Consigli di cottura</span><span>Preparati pronti</span><span>Consegna a domicilio</span><span>Tre generazioni di clienti</span>
+  </div>
+</div>
+
+<!-- BANCO -->
+<section id="banco" style="padding-bottom:0">
+  <div class="wrap">
+    <div class="eyebrow reveal">Il nostro banco</div>
+    <h2 class="reveal">Tutto fresco,<br>tutto in vetrina.</h2>
+    <p class="lead reveal">Bovino, vitello, suino, pollo e i preparati che facciamo ogni mattina. Questo è quello che trovi al banco. Tocca una foto per ingrandirla.</p>
+    <div class="gallery" id="gallery">
+      <figure class="g reveal" data-i="0"><img src="img/foto/banco-1.jpg" alt="Il banco del bovino" loading="lazy"><figcaption>Il banco del bovino</figcaption></figure>
+      <figure class="g reveal" data-i="1"><img src="img/foto/vetrina-pronti.jpg" alt="Preparati pronti da cuocere" loading="lazy"><figcaption>Preparati pronti da cuocere</figcaption></figure>
+      <figure class="g reveal" data-i="2"><img src="img/foto/banco-2.jpg" alt="Suino, salsicce e tagli del giorno" loading="lazy"><figcaption>Suino, salsicce e tagli del giorno</figcaption></figure>
+      <figure class="g reveal" data-i="3"><img src="img/foto/hamburger-farciti.jpg" alt="Hamburger farciti" loading="lazy"><figcaption>Hamburger farciti</figcaption></figure>
+      <figure class="g reveal" data-i="4"><img src="img/foto/vetrina-suino.jpg" alt="Suino, tacos e panati" loading="lazy"><figcaption>Suino, tacos e panati</figcaption></figure>
+      <figure class="g reveal" data-i="5"><img src="img/foto/spiedini-involtini.jpg" alt="Spiedini e involtini" loading="lazy"><figcaption>Spiedini e involtini</figcaption></figure>
+      <figure class="g reveal" data-i="6"><img src="img/foto/banco-4.jpg" alt="Specialità e marinati" loading="lazy"><figcaption>Specialità e marinati</figcaption></figure>
+      <figure class="g reveal" data-i="7"><img src="img/foto/hamburger-scaloppine.jpg" alt="Hamburger, scaloppine e spiedini" loading="lazy"><figcaption>Hamburger, scaloppine e spiedini</figcaption></figure>
+      <figure class="g reveal" data-i="8"><img src="img/foto/tacos-vassoio.jpg" alt="Tacos di carne" loading="lazy"><figcaption>Tacos di carne</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- TAGLI -->
+<section id="tagli">
+  <div class="wrap">
+    <div class="eyebrow reveal">Guida interattiva</div>
+    <h2 class="reveal">Tocca un taglio.<br>Ti diciamo come cucinarlo.</h2>
+    <p class="lead reveal">Ogni parte ha la sua cottura ideale. Esplora la mappa, scopri il piatto perfetto e aggiungi il taglio al tuo ordine.</p>
+    <div class="cuts-grid">
+      <div class="cow-box reveal">
+        <div class="hint"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11V5a2 2 0 1 1 4 0v6m0-2a2 2 0 1 1 4 0v4a7 7 0 0 1-7 7h-1a6 6 0 0 1-5-3l-2-4a2 2 0 0 1 3-2l1 2"/></svg>Seleziona una zona</div>
+        <svg id="cow" viewBox="0 0 620 340" role="img" aria-label="Mappa dei tagli del bovino">
+          <!-- testa e corna -->
+          <path class="cut" data-cut="guancia" d="M112 96 L70 84 L36 104 L22 150 L40 176 L74 182 L118 196 Z"/>
+          <text x="54" y="146">Guancia</text>
+          <path class="deco" d="M62 86 L52 60 L72 80 Z M92 88 L100 62 L106 92 Z"/>
+          <path class="cut" data-cut="collo" d="M112 96 L172 80 L176 214 L118 196 Z"/><text x="124" y="150">Collo</text>
+          <path class="cut" data-cut="spalla" d="M172 80 L262 70 L262 168 L175 168 Z"/><text x="194" y="124">Spalla</text>
+          <path class="cut" data-cut="petto" d="M175 168 L262 168 L262 240 L200 236 L176 214 Z"/><text x="196" y="208">Petto</text>
+          <path class="cut" data-cut="costata" d="M262 70 L342 68 L342 162 L262 168 Z"/><text x="272" y="122">Costata</text>
+          <path class="cut" data-cut="lombata" d="M342 68 L424 72 L424 156 L342 162 Z"/><text x="352" y="118">Lombata</text>
+          <path class="cut" data-cut="pancia" d="M262 168 L342 162 L424 156 L424 236 L262 240 Z"/><text x="318" y="206">Pancia</text>
+          <path class="cut" data-cut="scamone" d="M424 72 L486 80 L476 150 L424 156 Z"/><text x="430" y="118">Scamone</text>
+          <path class="cut" data-cut="coscia" d="M486 80 L534 108 L530 214 L480 240 L424 236 L424 156 L476 150 Z"/><text x="458" y="200">Coscia</text>
+          <path class="cut" data-cut="coda" d="M532 104 L560 120 L574 200 L586 212 L572 220 L560 206 L546 126 Z"/><text x="558" y="244">Coda</text>
+          <path class="cut" data-cut="stinco" d="M200 236 L238 238 L234 318 L204 318 Z M454 238 L500 230 L496 318 L464 318 Z"/><text x="188" y="336">Stinco</text>
+          <path class="deco" d="M266 240 L296 240 L294 318 L268 318 Z M500 230 L524 220 L520 318 L498 318 Z"/>
+        </svg>
+      </div>
+      <div class="cut-panel reveal" id="cutPanel" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<!-- GRIGLIATA -->
+<section id="grigliata" style="background:var(--bg2);border-block:1px solid var(--line)">
+  <div class="wrap">
+    <div class="eyebrow reveal">Calcolatore</div>
+    <h2 class="reveal">Quanta carne serve<br>per la tua grigliata?</h2>
+    <p class="lead reveal">Pasquetta, compleanno o domenica tra amici: imposta quante persone siete e calcoliamo noi le quantità. Poi la aggiungi all'ordine con un tocco.</p>
+    <div class="calc">
+      <div class="panel reveal">
+        <div class="field">
+          <label for="people">Persone <output id="peopleOut">8</output></label>
+          <input type="range" id="people" min="2" max="40" value="8">
+        </div>
+        <div class="field">
+          <div class="lbl">Appetito</div>
+          <div class="seg" id="appetite">
+            <button data-v="220">Leggero</button><button data-v="300" class="on">Normale</button><button data-v="420">Carnivoro</button>
+          </div>
+        </div>
+        <div class="field" style="margin-bottom:0">
+          <div class="lbl">Stile</div>
+          <div class="seg" id="style">
+            <button data-v="mista" class="on">Mista</button><button data-v="manzo">Manzo</button><button data-v="maiale">Maiale</button><button data-v="romana">Romana</button>
+          </div>
+        </div>
+      </div>
+      <div class="panel reveal">
+        <div class="result-head">
+          <div><div class="eyebrow" style="margin-bottom:10px">Totale consigliato</div><div class="total"><span id="totalKg">2,4</span> <small>kg</small></div><div class="small" id="totalEur" style="margin-top:8px"></div></div>
+          <button class="btn btn-red" id="addGrill">Aggiungi all'ordine</button>
+        </div>
+        <div class="rows" id="rows"></div>
+        <p class="note">Quantità orientative. In negozio ti consigliamo tagli e spessori in base alla brace che userai.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PACCHI -->
+<section id="pacchi" class="packs-sec">
+  <div class="wrap">
+    <div class="packs-top">
+      <div>
+        <div class="eyebrow reveal">I pacchi Trastevere Carni</div>
+        <h2 class="reveal">La spesa di carne,<br>già pronta in un pacco.</h2>
+        <p class="lead reveal">Li componiamo noi al banco con i tagli di ogni giorno. Prezzo fisso, niente sorprese, e te li portiamo a casa entro 48 ore.</p>
+      </div>
+      <div class="free48 reveal"><b>48h</b><span>Consegna<br>a casa</span></div>
+    </div>
+    <div class="ptabs reveal" id="ptabs" role="tablist">
+      <button role="tab" data-c="famiglia" class="on">Famiglia</button>
+      <button role="tab" data-c="scorta">Scorta</button>
+      <button role="tab" data-c="brace">Brace</button>
+    </div>
+    <p class="ptag" id="ptag"></p>
+    <div class="packs" id="packs"></div>
+    <div class="packs-info reveal">
+      <span>Consegna entro 48 ore dentro il Raccordo Anulare · 5 €</span>
+      <span>Info e ordini: <a href="https://wa.me/393389030246?text=Ciao%20Trastevere%20Carni%2C%20vorrei%20un%27informazione" target="_blank" rel="noopener">WhatsApp 338 903 0246</a> · <a href="tel:+390645556793">06 4555 6793</a></span>
+    </div>
+  </div>
+</section>
+
+<!-- PREPARATI -->
+<section id="preparati">
+  <div class="wrap">
+    <div class="prep-head">
+      <div>
+        <div class="eyebrow reveal">Preparati pronti</div>
+        <h2 class="reveal">Già pronti.<br>Tu devi solo cuocerli.</h2>
+        <p class="lead reveal">Tacos di carne, polpettoni, rotoli farciti, panati e marinati: li prepariamo ogni giorno al banco con la nostra carne. Ordinali online e passa a ritirarli, oppure te li portiamo a casa.</p>
+      </div>
+      <img class="prep-hero reveal" src="img/foto/tacos-vassoio.jpg" alt="Vassoio di tacos di carne farciti">
+    </div>
+    <div class="prods" id="prods"></div>
+  </div>
+</section>
+
+<!-- STORIA -->
+<section class="story" id="storia">
+  <div class="wrap">
+    <div class="eyebrow reveal">La nostra storia</div>
+    <h2 class="reveal">Una macelleria di quartiere,<br>passata di mano in mano.</h2>
+    <p class="lead reveal">Da noi non si viene solo a comprare la carne: si viene a chiedere un consiglio, a scoprire un piatto nuovo, a farsi preparare il taglio giusto. Così da generazioni.</p>
+    <div class="gens">
+      <div class="gen reveal"><div class="n">01</div><h3>La nonna</h3><p>Il bollito della domenica, lo spezzatino, il brodo buono. Le ricette di casa nascono qui al banco.</p></div>
+      <div class="gen reveal"><div class="n">02</div><h3>La mamma</h3><p>Le stesse mani, la stessa fiducia: la qualità non cambia e i consigli diventano tradizione di famiglia.</p></div>
+      <div class="gen reveal"><div class="n">03</div><h3>Oggi, tu</h3><p>Ordini al telefono, consegna a domicilio, preparati pronti per chi ha poco tempo. Lo stesso banco, nuovi modi.</p></div>
+    </div>
+    <blockquote class="pullquote reveal">“Ci andava mia nonna, ci andava mia madre ed ora ci sono io a continuare la tradizione.”<cite>— Alessandro, cliente da tre generazioni</cite></blockquote>
+  </div>
+</section>
+
+<!-- SERVIZI -->
+<section id="servizi">
+  <div class="wrap">
+    <div class="eyebrow reveal">Cosa facciamo</div>
+    <h2 class="reveal">Più di un banco frigo.</h2>
+    <div class="services">
+      <div class="svc reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg></div><h3>Consegna a domicilio</h3><p>Ordina per telefono e ricevi la carne a casa, puntuale e conservata a regola d'arte.</p></div>
+      <div class="svc reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 20 20 4M14 4h6v6"/><path d="M4 14l6 6"/></svg></div><h3>Tagli su misura</h3><p>Spessore, peso, porzionatura: prepariamo ogni pezzo come serve a te.</p></div>
+      <div class="svc reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3c3 4 5 6 5 10a5 5 0 0 1-10 0c0-2 1-4 2-5 0 2 1 3 2 3 0-3-1-5 1-8Z"/></svg></div><h3>Consigli di cottura</h3><p>Ti suggeriamo il taglio migliore e come prepararlo, anche per i piatti meno comuni.</p></div>
+      <div class="svc reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M8 8V5h8v3"/></svg></div><h3>Preparati pronti</h3><p>Ottimi preparati, pronti da cuocere, anche per i palati più esigenti.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- DELIVERY -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="deliv reveal">
+      <img src="img/foto/delivery.jpg" alt="Trastevere Carni Delivery">
+      <div>
+        <div class="eyebrow">Trastevere Carni Delivery</div>
+        <h2>La tua carne,<br>a casa tua.</h2>
+        <p class="lead">Scegli online, paga come preferisci e ricevi l'ordine nella fascia oraria che vuoi. Puoi anche ordinare per telefono allo <a href="tel:+390645556793">06 4555 6793</a>.</p>
+        <button class="btn btn-red" id="delivOrder">Ordina ora</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RECENSIONI -->
+<section id="recensioni" style="padding-top:0">
+  <div class="wrap">
+    <div class="rev-top">
+      <div><div class="eyebrow reveal">Recensioni</div><h2 class="reveal" style="margin-bottom:0">4,9 su 5.<br>Lo dicono i clienti.</h2></div>
+      <span class="live reveal" id="liveHint"><span class="dot"></span>Passa sulla carne · tocca per leggere</span>
+    </div>
+    <div class="rack reveal" id="rack"></div>
+    <div class="quote-box reveal" id="quoteBox" aria-live="polite"></div>
+  </div>
+</section>
+
+<!-- CONTATTI -->
+<section id="contatti" style="background:var(--bg2);border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="eyebrow reveal">Vieni a trovarci</div>
+    <h2 class="reveal">Ti aspettiamo al banco.</h2>
+    <div class="contact">
+      <div class="panel reveal">
+        <div class="info-list">
+          <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-6-7-12a7 7 0 0 1 14 0c0 6-7 12-7 12Z"/><circle cx="12" cy="9" r="2.5"/></svg><span><b>Indirizzo</b><a href="https://www.google.com/maps/dir/?api=1&destination=Via+Guglielmo+Mengarini+67+00149+Roma" target="_blank" rel="noopener">Via Guglielmo Mengarini, 67/69<br>00149 Roma</a></span></div>
+          <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg><span><b>Telefono e ordini</b><a href="tel:+390645556793">06 4555 6793</a><br><a href="https://wa.me/393389030246?text=Ciao%20Trastevere%20Carni%2C%20vorrei%20un%27informazione" target="_blank" rel="noopener">WhatsApp 338 903 0246</a></span></div>
+          <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span><b>Email</b><a href="mailto:trasteverecarni@gmail.com">trasteverecarni@gmail.com</a></span></div>
+          <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg><span><b>Seguici</b><a href="https://www.instagram.com/trasteverecarni/" target="_blank" rel="noopener">Instagram @trasteverecarni</a><br><a href="https://www.facebook.com/trasteverecarni" target="_blank" rel="noopener">Facebook · Trastevere Carni</a></span></div>
+          <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span style="flex:1"><b>Orari</b><table class="hours" id="hours"></table></span></div>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:28px">
+          <a class="btn btn-red" href="https://www.google.com/maps/dir/?api=1&destination=Via+Guglielmo+Mengarini+67+00149+Roma" target="_blank" rel="noopener">Indicazioni</a>
+          <a class="btn btn-ghost" href="tel:+390645556793">Chiama ora</a>
+          <a class="btn btn-wa" href="https://wa.me/393389030246?text=Ciao%20Trastevere%20Carni%2C%20vorrei%20un%27informazione" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3Z"/></svg>Scrivici su WhatsApp</a>
+        </div>
+      </div>
+      <div class="map reveal">
+        <iframe loading="lazy" title="Mappa Trastevere Carni" src="https://maps.google.com/maps?q=Via%20Guglielmo%20Mengarini%2067%2C%2000149%20Roma&z=16&output=embed"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div><span class="logo" style="font-size:1.1rem">Trastevere <i>Carni</i></span><div style="margin-top:6px">Macelleria · Via Guglielmo Mengarini 67/69, 00149 Roma</div><div style="margin-top:4px"><a href="mailto:trasteverecarni@gmail.com" style="color:var(--muted)">trasteverecarni@gmail.com</a></div><div class="social"><a href="https://www.instagram.com/trasteverecarni/" target="_blank" rel="noopener" aria-label="Instagram @trasteverecarni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a><a href="https://www.facebook.com/trasteverecarni" target="_blank" rel="noopener" aria-label="Facebook Trastevere Carni"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v2H8v4h2v8h4v-8h3l1-4h-4V8.5c0-.3.2-.5.5-.5Z"/></svg></a></div></div>
+    <div>© <span id="yr"></span> Trastevere Carni S.r.l. · P.IVA 14039211009<div class="legal"><a href="#condizioni">Condizioni di vendita</a><a href="#privacy">Privacy</a><a href="#cookie">Cookie</a><a href="#recesso">Resi e rimborsi</a></div></div>
+  </div>
+</footer>
+
+<a class="wa-float" href="https://wa.me/393389030246?text=Ciao%20Trastevere%20Carni%2C%20vorrei%20un%27informazione" target="_blank" rel="noopener" aria-label="Scrivici su WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3Z"/></svg></a>
+
+<!-- MOBILE BAR -->
+<div class="mbar">
+  <a href="tel:+390645556793"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>Chiama</a>
+  <button class="main" id="mOrder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 7h12l-1 13H7L6 7Z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>Il mio ordine <span id="mCount"></span></button>
+  <a class="wa" href="https://wa.me/393389030246?text=Ciao%20Trastevere%20Carni%2C%20vorrei%20un%27informazione" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3Z"/></svg>WhatsApp</a>
+</div>
+
+<!-- DRAWER -->
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="Il tuo ordine">
+  <div class="d-head"><h3>Il tuo ordine</h3><button id="closeD" aria-label="Chiudi" style="font-size:1.6rem;line-height:1">×</button></div>
+  <ol class="steps" id="steps"><li class="on cur">Carrello</li><li>Consegna</li><li>Pagamento</li></ol>
+  <div class="d-body" id="dBody">
+    <div class="pane on" data-step="1">
+      <div id="items"></div>
+      <div class="coupon"><input id="fCoupon" placeholder="Codice sconto" autocomplete="off"><button class="btn btn-ghost" id="applyCoupon" type="button">Applica</button></div>
+      <p class="msg" id="couponMsg"></p>
+      <button class="wa-link" id="waOrder" type="button" hidden></button>
+    </div>
+
+    <div class="pane" data-step="2">
+      <div class="lbl-s">Come vuoi riceverlo?</div>
+      <div class="seg" id="mode"><button data-v="ritiro" class="on">Ritiro in negozio</button><button data-v="consegna">Consegna a casa</button></div>
+      <div id="addrBox" hidden>
+        <div class="lbl-s">Indirizzo di consegna</div>
+        <p class="small">Consegniamo dentro il Grande Raccordo Anulare. Costo della consegna: 5 €.</p>
+        <input id="fAddr" placeholder="Via e numero civico" autocomplete="street-address">
+        <div class="two"><input id="fCap" placeholder="CAP" inputmode="numeric" maxlength="5" autocomplete="postal-code"><input id="fBell" placeholder="Citofono / scala / piano"></div>
+        <p class="msg" id="capMsg"></p>
+      </div>
+      <div class="lbl-s">Giorno</div>
+      <div class="days" id="days"></div>
+      <div class="lbl-s">Fascia oraria</div>
+      <div class="slots" id="slots"></div>
+      <div class="lbl-s">I tuoi dati</div>
+      <input id="fName" placeholder="Nome e cognome" autocomplete="name">
+      <div class="two"><input id="fPhone" placeholder="Telefono" type="tel" autocomplete="tel"><input id="fEmail" placeholder="Email per la ricevuta" type="email" autocomplete="email"></div>
+      <textarea id="fNote" rows="2" placeholder="Note per il macellaio: spessore, porzioni, tagli…"></textarea>
+    </div>
+
+    <div class="pane" data-step="3">
+      <div class="lbl-s">Metodo di pagamento</div>
+      <div class="pays">
+        <label class="pay"><input type="radio" name="pay" value="card" checked><span><b>Carta, Apple Pay, Google Pay</b><small>Pagamento sicuro con Stripe · 3D Secure</small></span><span class="logos">VISA<br>MASTERCARD<br>AMEX</span></label>
+        <label class="pay"><input type="radio" name="pay" value="paypal"><span><b>PayPal</b><small>Paga con il tuo conto PayPal</small></span></label>
+        <label class="pay"><input type="radio" name="pay" value="store"><span><b id="payStoreLbl">Paga al ritiro</b><small>Contanti, bancomat o carta al banco</small></span></label>
+      </div>
+      <div class="weight-note" id="weightNote"><span>⚖️</span><span>La carne viene pesata al momento del taglio. Sulla carta <b>blocchiamo l'importo stimato</b> e addebitiamo solo il peso reale: l'eventuale differenza viene sbloccata in automatico.</span></div>
+      <label class="check"><input type="checkbox" id="fInvoice"> Mi serve la fattura</label>
+      <div id="invoiceBox" hidden class="two"><input id="fVat" placeholder="Codice fiscale o P.IVA"><input id="fSdi" placeholder="Codice SDI o PEC"></div>
+      <label class="check"><input type="checkbox" id="fTerms"> <span>Ho letto e accetto le <a href="#condizioni">condizioni di vendita</a> e l'<a href="#privacy">informativa privacy</a> *</span></label>
+      <label class="check"><input type="checkbox" id="fNews"> <span>Voglio ricevere offerte e novità del banco (facoltativo)</span></label>
+      <div class="summary" id="summary"></div>
+    </div>
+
+    <div class="pane" data-step="4" id="donePane"></div>
+  </div>
+  <div class="d-foot" id="dFoot">
+    <div class="totline"><span id="totLbl">Totale stimato</span><b id="totVal">€ 0,00</b></div>
+    <div class="foot-btns"><button class="btn btn-ghost" id="backBtn" hidden>Indietro</button><button class="btn btn-red" id="nextBtn">Procedi</button></div>
+    <p class="secure"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Pagamento protetto · i dati della carta non passano dal nostro sito</p>
+  </div>
+  <div class="proc" id="proc"><div class="spin"></div><b id="procT">Connessione sicura…</b><small class="small" id="procS">Non chiudere questa finestra</small></div>
+</aside>
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Foto del banco">
+  <button class="lb-x" id="lbX" aria-label="Chiudi">×</button>
+  <button class="lb-p" id="lbP" aria-label="Foto precedente">‹</button>
+  <figure><img id="lbImg" alt=""><figcaption id="lbCap"></figcaption></figure>
+  <button class="lb-n" id="lbN" aria-label="Foto successiva">›</button>
+</div>
+<div class="toast" id="toast"></div>
+
+<script src="prezzi.js"></script>
+<script>
+// Configurazione negozio — da confermare con il titolare
+const PHONE = '+390645556793';
+const WHATSAPP = '393389030246'; // 338 903 0246
+const WA_ICON = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3Z"/></svg>';
+const waLink = msg => 'https://wa.me/'+WHATSAPP+(msg ? '?text='+encodeURIComponent(msg) : '');
+const HOURS = { // 0 = domenica; fasce in ore decimali
+  1:[[8,13]], 2:[[8,13]], 3:[[8,13],[16,19.5]], 4:[[8,13]], 5:[[8,13],[16,19.5]], 6:[[8,13]], 0:[]
+};
+// Festività in cui il negozio è chiuso (mese-giorno), più Pasquetta calcolata ogni anno
+const HOLIDAYS = ['01-01','01-06','04-25','05-01','06-02','06-29','08-15','11-01','12-08','12-25','12-26'];
+function easter(y){
+  const a=y%19,b=Math.floor(y/100),c=y%100,d=Math.floor(b/4),e=b%4,f=Math.floor((b+8)/25),g=Math.floor((b-f+1)/3),
+        h=(19*a+b-d-g+15)%30,i=Math.floor(c/4),k=c%4,l=(32+2*e+2*i-h-k)%7,m=Math.floor((a+11*h+22*l)/451),
+        n=h+l-7*m+114;
+  return new Date(y, Math.floor(n/31)-1, n%31+1);
+}
+function isHoliday(date){
+  const md = String(date.getMonth()+1).padStart(2,'0')+'-'+String(date.getDate()).padStart(2,'0');
+  if(HOLIDAYS.includes(md)) return true;
+  const pm = easter(date.getFullYear()); pm.setDate(pm.getDate()+1);
+  return pm.getMonth()===date.getMonth() && pm.getDate()===date.getDate();
+}
+
+const CUTS = {
+  guancia:{name:'Guancia',tag:'Testa',desc:'Taglio gelatinoso e saporito che con la cottura lenta diventa morbidissimo, da tagliare col cucchiaio.',cook:['Brasato','Cottura lenta','Pentola a pressione'],dish:['Guancia brasata al vino rosso','Con purè o polenta morbida'],g:800},
+  collo:{name:'Collo',tag:'Anteriore',desc:'Ricco di collagene e di sapore: è la base perfetta per brodi, ragù e spezzatini che cuociono per ore.',cook:['Bollito','Spezzatino','Ragù'],dish:['Brodo della domenica','Spezzatino con patate'],g:800},
+  spalla:{name:'Spalla',tag:'Anteriore',desc:'Versatile ed economica. Dal fesone di spalla al girello di spalla, si presta a brasati, polpette e arrosti.',cook:['Brasato','Arrosto','Macinato'],dish:['Polpette al sugo','Brasato al Barolo'],g:1000},
+  petto:{name:'Punta di petto',tag:'Anteriore',desc:'Fibre lunghe e grasso ben distribuito: il re del bollito romano e, affumicato, del brisket.',cook:['Bollito','Affumicatura','Forno lento'],dish:['Bollito con salsa verde','Brisket affumicato'],g:1200},
+  costata:{name:'Costata',tag:'Pregiato',desc:'Marezzata, con osso, profumatissima. Si serve alta, cotta alla brace e lasciata riposare.',cook:['Brace','Griglia','Ghisa'],dish:['Costata alta 4 cm, sale grosso e rosmarino','Circa 1 kg per 2 persone'],g:1000},
+  lombata:{name:'Lombata e Filetto',tag:'Pregiato',desc:'La zona più tenera: controfiletto, filetto e T-bone. Cotture veloci e decise per non perdere succosità.',cook:['Padella','Griglia','Rosolatura veloce'],dish:['Filetto al pepe verde','Tagliata rucola e grana'],g:600},
+  pancia:{name:'Pancia e Bavetta',tag:'Saporito',desc:'Tagli dal gusto intenso. La bavetta si griglia velocissima e si taglia contro fibra; la pancia va lenta.',cook:['Griglia veloce','Bollito','Marinatura'],dish:['Bavetta marinata alla griglia','Bollito misto'],g:700},
+  scamone:{name:'Scamone',tag:'Posteriore',desc:'Magro e tenero, ideale per chi vuole gusto pieno senza troppo grasso.',cook:['Griglia','Forno','Crudo'],dish:['Roast beef rosato','Carpaccio con limone e scaglie'],g:800},
+  coscia:{name:'Coscia',tag:'Posteriore',desc:'Girello, noce, fesa e sottofesa: tagli magri e compatti, perfetti per fettine e preparazioni classiche.',cook:['Padella','Bollito','Crudo'],dish:['Saltimbocca alla romana','Vitello tonnato (girello)'],g:600},
+  coda:{name:'Coda',tag:'Quinto quarto',desc:'Un classico della cucina romana: tanta pazienza e una cottura lunghissima ripagano con un sugo unico.',cook:['Stufato','Cottura lenta'],dish:['Coda alla vaccinara','Il sugo per condire i rigatoni'],g:1200},
+  stinco:{name:'Stinco e Ossobuco',tag:'Arti',desc:'Muscolo ricco di collagene con il midollo al centro: si scioglie in bocca dopo una lenta cottura.',cook:['Brasato','Forno','Umido'],dish:['Ossobuco con gremolata','Stinco al forno con patate'],g:1000}
+};
+
+const MIX = {
+  mista:[['Salsicce di maiale',.25],['Costolette di maiale',.2],['Bistecca di manzo',.25],['Abbacchio a scottadito',.15],['Spiedini di pollo',.15]],
+  manzo:[['Costata',.4],['Tagliata di scamone',.3],['Hamburger della casa',.3]],
+  maiale:[['Salsicce',.35],['Costine',.35],['Capocollo a fette',.3]],
+  romana:[['Abbacchio a scottadito',.45],['Salsicce',.3],['Coratella / spiedini',.25]]
+};
+
+const $ = s => document.querySelector(s);
+const fmt = g => g >= 1000 ? (g/1000).toLocaleString('it-IT',{maximumFractionDigits:2})+' kg' : g+' g';
+
+// --- Pacchi (dai volantini del negozio: Pacchi Famiglia, Scorta e Brace)
+const PACKS = {
+  famiglia:{tag:'La spesa di carne della settimana per tutta la famiglia.', list:[
+    {name:'Famiglia da €40', price:40, items:[[1,'kg','Macinato','o 10 hamburger'],[1,'kg','Petto di pollo'],[1,'kg','Fettine di manzo']]},
+    {name:'Famiglia da €65', price:65, items:[[1,'kg','Macinato','o 10 hamburger'],[1,'kg','Fettine di manzo'],[1,'kg','Straccetti'],[1,'kg','Cosce e sovracosce di pollo'],[1,'kg','Bistecche di maiale'],[.5,'kg','Salsicce']]},
+    {name:'Famiglia da €95', price:95, items:[[1,'kg','Spezzatino di manzo'],[1,'kg','Macinato scelto'],[1,'kg','Straccetti di manzo'],[1,'kg','Coscia e sovracoscia di pollo'],[1,'kg','Petto di pollo'],[1,'kg','Bistecche di maiale'],[.5,'kg','Salsicce'],[10,'pz','Polpette'],[6,'pz','Uova']]}
+  ]},
+  scorta:{tag:'Per riempire il freezer e avere carne buona per settimane.', list:[
+    {name:'Scorta da €80', price:80, items:[[6,'pz','Uova'],[10,'pz','Polpette'],[.5,'kg','Salsicce'],[1,'kg','Bistecche di maiale'],[1,'kg','Petto di pollo'],[1,'kg','Cosce e sovracosce di pollo'],[1,'kg','Straccetti di manzo'],[1,'kg','Macinato scelto'],[1,'kg','Spezzatino di manzo']]},
+    {name:'Scorta da €130', price:130, items:[[6,'pz','Uova'],[10,'pz','Polpette di carne mista'],[10,'pz','Hamburger'],[.5,'kg','Salsicce'],[1,'kg','Petto di pollo'],[1,'kg','Cosce di pollo'],[1,'kg','Bistecche di maiale'],[1,'kg','Fettine da panare'],[1,'kg','Straccetti di manzo'],[1,'kg','Macinato di manzo'],[1,'kg','Fettine di manzo'],[1,'kg','Controfiletto di manzo']]}
+  ]},
+  brace:{tag:'Tutto quello che serve per la grigliata, pronto da mettere sul fuoco.', list:[
+    {name:'Brace da €60', price:60, items:[[.5,'kg','Spuntature'],[1,'kg','Bistecche di maiale'],[.5,'kg','Salsicce'],[.5,'kg','Pancetta'],[1,'kg','Bistecche di manzo'],[1,'kg','Cosce e sovracosce di pollo']]},
+    {name:'Brace da €70', price:70, items:[[.5,'kg','Pancetta'],[1,'kg','Bistecche di manzo'],[5,'pz','Spiedini'],[1,'kg','Cosce e sovracosce di pollo'],[20,'pz','Arrosticini'],[.5,'kg','Salsicce']]}
+  ]}
+};
+const PACK_PRICE = PREZZI.pacchi;
+Object.values(PACKS).forEach(c=>c.list.forEach(p=>{ p.price = PACK_PRICE['Pacco '+p.name] ?? p.price; }));
+
+// --- Carrello e checkout
+// Prezzi in €/kg: dove leggibili presi dai cartellini in vetrina (foto del negozio), gli altri di esempio — da confermare
+// Prezzi, pacchi, consegna e sconti arrivano da prezzi.js (lo stesso file usato dal pagamento online)
+const PRICES = PREZZI.kg;
+const DELIVERY_FEE = PREZZI.consegna.costo, FREE_DELIVERY = PREZZI.consegna.gratisSopra, MIN_DELIVERY = PREZZI.consegna.minimo, HOLD_MARGIN = PREZZI.marginePeso;
+const DELIVERY_CAPS = PREZZI.consegna.cap;
+const COUPONS = PREZZI.coupon;
+// Sul sito pubblicato i pagamenti passano da api/ (Stripe); in anteprima locale resta la modalità demo.
+// Anteprima (nessun pagamento reale): computer locale e GitHub Pages, che non esegue PHP
+const LIVE = /^https?:$/.test(location.protocol) && !/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname) && !/\.github\.io$/.test(location.hostname);
+const CHECKOUT_ENDPOINT = LIVE ? 'api/checkout.php' : '';
+const ORDER_ENDPOINT = LIVE ? 'api/ordine.php' : '';
+
+const eur = n => n.toLocaleString('it-IT',{style:'currency',currency:'EUR'});
+const priceOf = (name,g) => PACK_PRICE[name] ? PACK_PRICE[name]*g : (PRICES[name] ?? 20) * g / 1000;
+const qtyFmt = (name,g) => PACK_PRICE[name] ? g+(g===1?' pacco':' pacchi') : fmt(g);
+const qtyStep = name => PACK_PRICE[name] ? 1 : 100;
+const hasPack = () => [...cart.keys()].some(n=>PACK_PRICE[n]);
+const hasKgItems = () => [...cart.keys()].some(n=>!PACK_PRICE[n]);
+const kgTotal = () => [...cart].reduce((s,[n,g])=>s+(PACK_PRICE[n]?0:priceOf(n,g)),0);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const val = id => $(id).value.trim();
+const MONTHS = ['gen','feb','mar','apr','mag','giu','lug','ago','set','ott','nov','dic'];
+
+const cart = new Map();
+const co = {step:1, mode:'ritiro', day:null, slot:null, coupon:null};
+
+function add(name, g, silent){
+  cart.set(name, (cart.get(name)||0) + g);
+  if(co.step===4) goStep(1);
+  renderCart();
+  if(!silent) toast(name+' aggiunto');
+  const b=$('#cartBtn'); b.classList.remove('bump'); void b.offsetWidth; b.classList.add('bump');
+}
+function totals(){
+  let sub=0; cart.forEach((g,n)=>sub+=priceOf(n,g));
+  const disc = co.coupon ? sub*COUPONS[co.coupon] : 0;
+  const ship = co.mode==='consegna' && cart.size ? (FREE_DELIVERY && sub-disc>=FREE_DELIVERY ? 0 : DELIVERY_FEE) : 0;
+  return {sub, disc, ship, tot:sub-disc+ship};
+}
+function renderCart(){
+  const n = cart.size;
+  $('#cartCount').textContent = n; $('#cartCount').classList.toggle('on', n>0);
+  $('#mCount').textContent = n ? '('+n+')' : '';
+  const box = $('#items');
+  if(!n){ box.innerHTML = '<div class="empty"><div class="big">🥩</div><p>Il tuo ordine è vuoto.<br>Scegli un taglio o usa il calcolatore.</p></div>'; }
+  else {
+    box.innerHTML = '';
+    cart.forEach((g,name)=>{
+      const el = document.createElement('div'); el.className='item';
+      el.innerHTML = `<div><div class="nm"></div><small class="small">${PACK_PRICE[name] ? 'Prezzo fisso' : eur(PRICES[name]??20)+'/kg'}</small> · <button class="rm">Rimuovi</button></div>
+        <div class="r"><div class="qty"><button aria-label="Meno">−</button><span>${qtyFmt(name,g)}</span><button aria-label="Più">+</button></div><div class="pr">${eur(priceOf(name,g))}</div></div>`;
+      el.querySelector('.nm').textContent = name;
+      const [minus, plus] = el.querySelectorAll('.qty button');
+      minus.onclick = ()=>{ const v=cart.get(name)-qtyStep(name); v<=0?cart.delete(name):cart.set(name,v); renderCart(); };
+      plus.onclick = ()=>{ cart.set(name,cart.get(name)+qtyStep(name)); renderCart(); };
+      el.querySelector('.rm').onclick = ()=>{ cart.delete(name); renderCart(); };
+      box.appendChild(el);
+    });
+  }
+  try{ localStorage.setItem('tc_cart', JSON.stringify([...cart])); }catch(e){}
+  $('#waOrder').hidden = !n;
+  $('#waOrder').innerHTML = WA_ICON + 'Preferisci WhatsApp? Invia l\'ordine in chat';
+  if(!n && co.step!==4 && co.step!==1) goStep(1);
+  updateFoot();
+}
+const payMethod = () => document.querySelector('input[name=pay]:checked').value;
+function updateFoot(){
+  const t = totals(), nb = $('#nextBtn');
+  $('#totVal').textContent = eur(t.tot);
+  nb.disabled = false;
+  if(co.step===1){ nb.disabled = !cart.size; nb.textContent = cart.size ? 'Procedi · '+eur(t.tot) : 'Il carrello è vuoto'; }
+  else if(co.step===2) nb.textContent = 'Continua al pagamento';
+  else if(co.step===3) nb.textContent = payMethod()==='store' ? 'Conferma ordine' : 'Paga '+eur(t.tot);
+  nb.style.opacity = nb.disabled ? .5 : 1;
+  $('#backBtn').hidden = co.step===1;
+  if(co.step===3) renderSummary();
+}
+function goStep(n){
+  co.step = n;
+  document.querySelectorAll('.pane').forEach(p=>p.classList.toggle('on', +p.dataset.step===n));
+  document.querySelectorAll('#steps li').forEach((li,i)=>{ li.classList.toggle('on', i<n); li.classList.toggle('cur', i===n-1); });
+  $('#steps').hidden = $('#dFoot').hidden = n===4;
+  $('#dBody').scrollTop = 0;
+  if(n===2) renderDays();
+  updateFoot();
+}
+function openD(on){
+  if(on && co.step===4) goStep(1);
+  $('#drawer').classList.toggle('on',on); $('#scrim').classList.toggle('on',on); document.body.classList.toggle('d-open',on); document.body.style.overflow = on?'hidden':'';
+}
+$('#cartBtn').onclick = ()=>openD(true); $('#mOrder').onclick = ()=>openD(true);
+$('#closeD').onclick = ()=>openD(false); $('#scrim').onclick = ()=>openD(false);
+addEventListener('keydown', e=>{ if(e.key==='Escape') openD(false); });
+
+$('#waOrder').onclick = ()=>{
+  let msg = 'Ciao Trastevere Carni, vorrei ordinare:\n';
+  cart.forEach((g,n)=> msg += `• ${n} — ${qtyFmt(n,g)}\n`);
+  msg += `\nTotale stimato: ${eur(totals().tot)}`;
+  window.open(waLink(msg), '_blank', 'noopener');
+};
+
+// Coupon
+$('#applyCoupon').onclick = ()=>{
+  const code = val('#fCoupon').toUpperCase(), m = $('#couponMsg');
+  if(COUPONS[code]){ co.coupon = code; m.className='msg ok'; m.textContent = `✓ Sconto del ${COUPONS[code]*100}% applicato`; }
+  else { co.coupon = null; m.className='msg ko'; m.textContent = code ? 'Codice non valido' : ''; }
+  renderCart();
+};
+
+// Ritiro / consegna, giorni e fasce orarie
+segment('#mode', v=>{
+  co.mode = v;
+  $('#addrBox').hidden = v!=='consegna';
+  $('#payStoreLbl').textContent = v==='consegna' ? 'Paga alla consegna' : 'Paga al ritiro';
+  renderDays(); updateFoot();
+});
+function slotsFor(d, minStart){
+  const res = [];
+  (HOURS[d]||[]).forEach(([a,b])=>{
+    for(let s = Math.max(Math.ceil(a), co.mode==='consegna' ? 9 : 0); s+1 <= b; s++) if(s >= minStart) res.push([s, s+1]);
+  });
+  return res;
+}
+function openDays(){
+  const out = [], {day, h} = romeNow(), now = new Date();
+  for(let i=0; i<10 && out.length<5; i++){
+    const d = (day+i)%7, date = new Date(now); date.setDate(now.getDate()+i);
+    const slots = slotsFor(d, i===0 ? h+1.5 : 0); // serve almeno un'ora e mezza per preparare
+    if(slots.length && !isHoliday(date)) out.push({i, d, date, slots});
+  }
+  return out;
+}
+const dayLabel = o => o.i===0 ? 'Oggi' : o.i===1 ? 'Domani' : DAYS[o.d];
+const slotLabel = s => hh(s[0])+' – '+hh(s[1]);
+function renderDays(){
+  const list = openDays();
+  if(!co.day || !list.some(o=>o.i===co.day.i)) co.day = list[0] || null;
+  else co.day = list.find(o=>o.i===co.day.i);
+  $('#days').innerHTML = list.map(o=>`<button data-i="${o.i}" class="${o.i===co.day?.i?'on':''}">${o.i===0?'Oggi':DAYS[o.d].slice(0,3)}<b>${o.date.getDate()}</b>${MONTHS[o.date.getMonth()]}</button>`).join('');
+  $('#days').querySelectorAll('button').forEach(b=>b.onclick=()=>{ co.day = list.find(o=>o.i===+b.dataset.i); renderDays(); });
+  renderSlots();
+}
+function renderSlots(){
+  const slots = co.day ? co.day.slots : [];
+  if(co.slot && !slots.some(s=>s[0]===co.slot[0])) co.slot = null;
+  $('#slots').innerHTML = slots.length ? slots.map(s=>`<button data-s="${s[0]}" class="${co.slot?.[0]===s[0]?'on':''}">${slotLabel(s)}</button>`).join('') : '<p class="small">Nessuna fascia disponibile</p>';
+  $('#slots').querySelectorAll('button').forEach(b=>b.onclick=()=>{ co.slot = slots.find(s=>s[0]===+b.dataset.s); renderSlots(); });
+}
+$('#fCap').addEventListener('input', ()=>{
+  const cap = val('#fCap'), m = $('#capMsg');
+  if(cap.length<5){ m.textContent=''; return; }
+  const ok = DELIVERY_CAPS.includes(cap);
+  m.className = 'msg '+(ok?'ok':'ko');
+  m.textContent = ok ? `✓ Consegniamo al CAP ${cap}` : '✗ Consegniamo solo dentro il Raccordo Anulare. Se sei vicino al confine scrivici su WhatsApp';
+});
+$('#fInvoice').onchange = e => $('#invoiceBox').hidden = !e.target.checked;
+document.querySelectorAll('input[name=pay]').forEach(r=>r.onchange=()=>{ $('#weightNote').hidden = payMethod()==='store'; updateFoot(); });
+
+// Validazione
+function need(id, ok){ $(id).classList.toggle('err', !ok); return ok; }
+function validate(step){
+  if(step===2){
+    let ok = need('#fName', val('#fName').length>2);
+    ok = need('#fPhone', val('#fPhone').replace(/\D/g,'').length>=8) && ok;
+    ok = need('#fEmail', /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(val('#fEmail'))) && ok;
+    if(co.mode==='consegna'){
+      ok = need('#fAddr', val('#fAddr').length>4) && ok;
+      ok = need('#fCap', DELIVERY_CAPS.includes(val('#fCap'))) && ok;
+    }
+    if(!ok) return 'Controlla i campi evidenziati';
+    if(co.mode==='consegna' && totals().sub < MIN_DELIVERY) return 'Ordine minimo per la consegna: '+eur(MIN_DELIVERY);
+    if(!co.slot) return 'Scegli una fascia oraria';
+  }
+  if(step===3){
+    if($('#fInvoice').checked && !need('#fVat', val('#fVat').length>=11)) return 'Inserisci codice fiscale o partita IVA';
+    if(!$('#fTerms').checked) return 'Devi accettare le condizioni di vendita';
+  }
+  return '';
+}
+function renderSummary(){
+  const t = totals(), card = payMethod()!=='store';
+  $('#summary').innerHTML = `
+    <div class="sl"><span>Subtotale (${cart.size} ${cart.size===1?'articolo':'articoli'})</span><span>${eur(t.sub)}</span></div>
+    ${t.disc ? `<div class="sl ok"><span>Sconto ${co.coupon}</span><span>−${eur(t.disc)}</span></div>` : ''}
+    <div class="sl"><span>${co.mode==='consegna'?'Consegna a domicilio':'Ritiro in negozio'}</span><span>${t.ship?eur(t.ship):'Gratis'}</span></div>
+    <div class="sl t"><span>Totale stimato</span><span>${eur(t.tot)}</span></div>
+    <p class="small">${co.day?dayLabel(co.day)+' '+co.day.date.getDate()+' '+MONTHS[co.day.date.getMonth()]:''} · ${co.slot?slotLabel(co.slot):''}
+    ${card && hasKgItems() ? `<br>Importo massimo bloccato sulla carta: ${eur(t.tot + kgTotal()*(1-(COUPONS[co.coupon]||0))*HOLD_MARGIN)}. Paghi solo il peso reale.` : ''}
+    ${co.mode==='consegna' && t.ship && FREE_DELIVERY ? `<br>Consegna gratuita sopra ${eur(FREE_DELIVERY)}` : ''}</p>`;
+}
+
+$('#nextBtn').onclick = ()=>{
+  if(co.step===1){ if(cart.size) goStep(2); return; }
+  const err = validate(co.step);
+  if(err){ toast(err); return; }
+  if(co.step===2) goStep(3); else pay();
+};
+$('#backBtn').onclick = ()=>goStep(co.step-1);
+
+// Pagamento
+function buildOrder(){
+  const t = totals(), d = new Date();
+  return {
+    id: 'TC-'+String(d.getMonth()+1).padStart(2,'0')+String(d.getDate()).padStart(2,'0')+'-'+Math.random().toString(36).slice(2,6).toUpperCase(),
+    created: d.toISOString(),
+    items: [...cart].map(([name,grams])=>({name, grams, pack:!!PACK_PRICE[name], eurKg:PACK_PRICE[name]?null:PRICES[name]??20, price:+priceOf(name,grams).toFixed(2)})),
+    mode: co.mode, date: co.day.date.toISOString().slice(0,10), dayLabel: dayLabel(co.day)+' '+co.day.date.getDate()+' '+MONTHS[co.day.date.getMonth()], slot: co.slot,
+    customer: {name:val('#fName'), phone:val('#fPhone'), email:val('#fEmail'), newsletter:$('#fNews').checked},
+    address: co.mode==='consegna' ? {street:val('#fAddr'), cap:val('#fCap'), bell:val('#fBell')} : null,
+    note: val('#fNote'), payment: payMethod(), coupon: co.coupon,
+    invoice: $('#fInvoice').checked ? {vat:val('#fVat'), sdi:val('#fSdi')} : null,
+    totals: {subtotal:+t.sub.toFixed(2), discount:+t.disc.toFixed(2), delivery:t.ship, total:+t.tot.toFixed(2), maxHold:+(t.tot*(1+HOLD_MARGIN)).toFixed(2)}
+  };
+}
+const wait = ms => new Promise(r=>setTimeout(r,ms));
+async function postOrder(url, order){
+  const r = await fetch(url, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(order)});
+  const j = await r.json().catch(()=>({}));
+  if(!r.ok) throw new Error(j.error || 'Servizio non disponibile, riprova tra poco');
+  return j;
+}
+async function pay(){
+  const order = buildOrder(), m = order.payment, proc = $('#proc'), nb = $('#nextBtn');
+  if(m==='store'){
+    if(ORDER_ENDPOINT){
+      nb.disabled = true; nb.textContent = 'Invio dell\'ordine…';
+      try{ const j = await postOrder(ORDER_ENDPOINT, order); order.id = j.id; order.totals = {...order.totals, ...j.totals}; }
+      catch(e){ toast(e.message); updateFoot(); return; }
+    }
+    finish(order, false); return;
+  }
+  proc.classList.add('on');
+  if(CHECKOUT_ENDPOINT){
+    $('#procT').textContent = 'Ti portiamo al pagamento sicuro…'; $('#procS').textContent = 'Pagamento gestito da Stripe';
+    try{
+      const j = await postOrder(CHECKOUT_ENDPOINT, order);
+      order.id = j.id; order.totals = {...order.totals, ...j.totals};
+      try{ localStorage.setItem('tc_pending', JSON.stringify(order)); }catch(e){}
+      location.href = j.url;
+    }catch(e){ proc.classList.remove('on'); toast(e.message); }
+    return;
+  }
+  // Modalità demo: simula il passaggio dal provider di pagamento
+  const steps = m==='paypal'
+    ? [['Apertura di PayPal…','Connessione protetta'],['Autorizzazione in corso…','Conferma sul tuo conto PayPal'],['Pagamento autorizzato ✓','']]
+    : [['Connessione sicura a Stripe…','Crittografia TLS · PCI DSS'],['Verifica 3D Secure…','Conferma nell\'app della tua banca'],['Pagamento autorizzato ✓','']];
+  for(const [t,s] of steps){ $('#procT').textContent=t; $('#procS').textContent=s; await wait(900); }
+  proc.classList.remove('on');
+  finish(order, true);
+}
+function finish(order, paid){
+  try{ const all = JSON.parse(localStorage.getItem('tc_orders')||'[]'); all.unshift(order); localStorage.setItem('tc_orders', JSON.stringify(all.slice(0,20))); }catch(e){}
+  const where = order.address ? esc(order.address.street)+', '+esc(order.address.cap)+' Roma' : 'Via Guglielmo Mengarini 67/69, Roma';
+  $('#donePane').innerHTML = `<div class="done">
+    <svg class="tick" viewBox="0 0 52 52"><circle cx="26" cy="26" r="24"/><path d="M15 27l7 7 15-15"/></svg>
+    <h3>Grazie, ${esc(order.customer.name.split(' ')[0])}!</h3>
+    <p>Ordine <b>${order.id}</b> ${paid?'pagato e confermato':'confermato'}.</p>
+    ${LIVE?'':'<span class="demo">Anteprima · nessun addebito e nessun ordine inviato</span>'}
+    <ol class="otrack"><li class="ok">Ricevuto</li><li>In preparazione</li><li>${order.mode==='consegna'?'In consegna':'Pronto al ritiro'}</li></ol>
+    <div class="summary">
+      ${order.items.map(i=>`<div class="sl"><span>${esc(i.name)} · ${qtyFmt(i.name,i.grams)}</span><span>${eur(i.price)}</span></div>`).join('')}
+      ${order.totals.discount?`<div class="sl ok"><span>Sconto</span><span>−${eur(order.totals.discount)}</span></div>`:''}
+      ${order.mode==='consegna'?`<div class="sl"><span>Consegna</span><span>${order.totals.delivery?eur(order.totals.delivery):'Gratis'}</span></div>`:''}
+      <div class="sl t"><span>${paid?'Totale':'Da pagare '+(order.mode==='consegna'?'alla consegna':'al ritiro')}</span><span>${eur(order.totals.total)}</span></div>
+    </div>
+    <p class="small"><b>${order.mode==='consegna'?'Consegna':'Ritiro'}:</b> ${order.dayLabel}, ${slotLabel(order.slot)}<br>${where}</p>
+    <p class="small">${LIVE?`Ti abbiamo inviato la conferma a <b>${esc(order.customer.email)}</b>. `:''}Per qualsiasi cosa scrivici su WhatsApp.${paid && order.items.some(i=>!i.pack)?' Sulla carta addebitiamo solo il peso reale della carne.':''}</p>
+    <div class="done-btns">
+      <button class="btn btn-red" id="icsBtn">Aggiungi al calendario</button>
+      <a class="btn btn-wa" href="${waLink('Ciao, ho appena fatto l\'ordine '+order.id+' sul sito')}" target="_blank" rel="noopener">${WA_ICON}Scrivici su WhatsApp</a>
+      <a class="btn btn-ghost" href="tel:${PHONE}">Chiama il negozio</a>
+      <button class="btn btn-ghost" id="doneClose">Torna al sito</button>
+    </div></div>`;
+  $('#icsBtn').onclick = ()=>downloadIcs(order);
+  $('#doneClose').onclick = ()=>openD(false);
+  cart.clear(); co.coupon = null; $('#fCoupon').value = ''; $('#couponMsg').textContent = ''; $('#fTerms').checked = false;
+  goStep(4); renderCart();
+}
+function downloadIcs(o){
+  const d = o.date.replace(/-/g,''), p = n => String(Math.floor(n)).padStart(2,'0')+String(Math.round(n%1*60)).padStart(2,'0')+'00';
+  const ics = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Trastevere Carni//Ordini//IT','BEGIN:VEVENT',
+    'UID:'+o.id+'@trasteverecarni','DTSTAMP:'+new Date().toISOString().replace(/[-:]/g,'').slice(0,15)+'Z',
+    'DTSTART;TZID=Europe/Rome:'+d+'T'+p(o.slot[0]),'DTEND;TZID=Europe/Rome:'+d+'T'+p(o.slot[1]),
+    'SUMMARY:'+(o.mode==='consegna'?'Consegna':'Ritiro')+' ordine Trastevere Carni '+o.id,
+    'LOCATION:'+(o.address?o.address.street+' '+o.address.cap+' Roma':'Via Guglielmo Mengarini 67\\, 00149 Roma'),
+    'END:VEVENT','END:VCALENDAR'].join('\r\n');
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([ics],{type:'text/calendar'})); a.download = o.id+'.ics'; a.click();
+}
+
+let tt;
+function toast(t){ const el=$('#toast'); el.textContent=t; el.classList.add('on'); clearTimeout(tt); tt=setTimeout(()=>el.classList.remove('on'),2600); }
+
+// --- Segmented controls
+function segment(sel, cb){
+  const root=$(sel);
+  root.addEventListener('click', e=>{
+    const b=e.target.closest('button'); if(!b) return;
+    root.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));
+    cb(b.dataset.v);
+  });
+}
+
+// --- Cuts map
+let current = 'costata';
+function showCut(id){
+  current = id; const c = CUTS[id];
+  document.querySelectorAll('#cow .cut').forEach(p=>p.classList.toggle('active', p.dataset.cut===id));
+  document.querySelectorAll('#cow text').forEach(t=>t.classList.remove('on'));
+  const p = $(`#cow .cut[data-cut="${id}"]`); if(p && p.nextElementSibling?.tagName==='text') p.nextElementSibling.classList.add('on');
+  const panel = $('#cutPanel');
+  panel.innerHTML = `<div class="eyebrow">${c.tag}</div><h3>${c.name}</h3><p>${c.desc}</p>
+    <div class="chips">${c.cook.map(x=>`<span class="chip">${x}</span>`).join('')}</div>
+    <div class="dish">Il piatto perfetto<br><b>${c.dish[0]}</b><br><span style="color:var(--muted)">${c.dish[1]}</span></div>
+    <div style="height:24px"></div>
+    <button class="btn btn-red" id="addCut">Aggiungi ${fmt(c.g)} · ${eur(priceOf(c.name,c.g))}</button>`;
+  panel.classList.remove('fade-swap'); void panel.offsetWidth; panel.classList.add('fade-swap');
+  $('#addCut').onclick = ()=>add(c.name, c.g);
+}
+document.querySelectorAll('#cow .cut').forEach(p=>{
+  p.setAttribute('tabindex','0'); p.setAttribute('role','button'); p.setAttribute('aria-label', CUTS[p.dataset.cut].name);
+  p.addEventListener('click', ()=>showCut(p.dataset.cut));
+  p.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); showCut(p.dataset.cut); } });
+});
+showCut(current);
+
+// --- Grill calculator
+const calc = {people:8, app:300, style:'mista', items:[]};
+function runCalc(){
+  const total = calc.people * calc.app;
+  $('#totalKg').textContent = (total/1000).toLocaleString('it-IT',{maximumFractionDigits:1});
+  calc.items = MIX[calc.style].map(([n,f])=>[n, Math.max(100, Math.round(total*f/50)*50)]);
+  const max = Math.max(...calc.items.map(i=>i[1]));
+  $('#totalEur').textContent = '≈ '+eur(calc.items.reduce((s,[n,g])=>s+priceOf(n,g),0))+' stimati';
+  $('#rows').innerHTML = calc.items.map(([n,g])=>`<div class="row"><span>${n}</span><b>${fmt(g)}</b><div class="bar"><i style="width:${g/max*100}%"></i></div></div>`).join('');
+}
+const range = $('#people');
+function onRange(){ calc.people=+range.value; $('#peopleOut').textContent=range.value; range.style.setProperty('--p', ((range.value-range.min)/(range.max-range.min)*100)+'%'); runCalc(); }
+range.addEventListener('input', onRange);
+segment('#appetite', v=>{ calc.app=+v; runCalc(); });
+segment('#style', v=>{ calc.style=v; runCalc(); });
+$('#addGrill').onclick = ()=>{ calc.items.forEach(([n,g])=>add(n,g,true)); toast(`Grigliata per ${calc.people} aggiunta`); };
+onRange();
+
+// --- Open status & hours
+const DAYS = ['Domenica','Lunedì','Martedì','Mercoledì','Giovedì','Venerdì','Sabato'];
+const hh = h => { const m=Math.round((h%1)*60); return Math.floor(h)+':'+String(m).padStart(2,'0'); };
+function romeNow(){
+  const parts = new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Rome',weekday:'short',hour:'2-digit',minute:'2-digit',hour12:false}).formatToParts(new Date());
+  const get = t => parts.find(p=>p.type===t).value;
+  const day = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].indexOf(get('weekday'));
+  return {day, h: +get('hour') + +get('minute')/60};
+}
+function status(){
+  const {day,h} = romeNow(), hol = isHoliday(new Date());
+  const slot = hol ? null : HOURS[day].find(([a,b])=>h>=a&&h<b);
+  const el=$('#status');
+  if(slot){ el.classList.add('open'); $('#statusTxt').innerHTML = `Aperto <span class="lbl-long">· chiude alle ${hh(slot[1])}</span>`; }
+  else { el.classList.remove('open');
+    let txt = hol ? 'Chiuso per festività' : 'Chiuso';
+    for(let i=0;i<10;i++){ const d=(day+i)%7, dt=new Date(); dt.setDate(dt.getDate()+i); if(isHoliday(dt)) continue; const s=HOURS[d].find(([a])=> i>0 || a>h); if(s){ txt+=` <span class="lbl-long">· apre ${i===0?'oggi':i===1?'domani':DAYS[d].toLowerCase()} ${hh(s[0])}</span>`; break; } }
+    $('#statusTxt').innerHTML = txt; }
+  const order=[1,2,3,4,5,6,0];
+  $('#hours').innerHTML = order.map(d=>`<tr class="${d===day?'today':''}"><td>${DAYS[d]}</td><td>${HOURS[d].length?HOURS[d].map(([a,b])=>hh(a)+' – '+hh(b)).join(', '):'Chiuso'}</td></tr>`).join('') + '<tr><td colspan="2" class="small">Chiuso la domenica e nei giorni festivi</td></tr>';
+}
+status(); setInterval(status, 60000);
+
+// --- Hero rotating word + spotlight
+const words=['Costata','Filetto','Abbacchio','Salsiccia','Ossobuco','Tagliata'];
+let wi=0; const rot=$('#rot');
+setInterval(()=>{ rot.classList.add('out'); setTimeout(()=>{ wi=(wi+1)%words.length; rot.textContent=words[wi]; rot.classList.remove('out'); },400); }, 2200);
+const hero=$('.hero');
+hero.addEventListener('pointermove', e=>{ const r=hero.getBoundingClientRect(); $('#spot').style.setProperty('--mx',(e.clientX-r.left)+'px'); $('#spot').style.setProperty('--my',(e.clientY-r.top)+'px'); });
+
+// --- Sezione pacchi
+const qLabel = ([q,u]) => u==='kg' ? (q===.5 ? '½ kg' : q+' kg') : q+' pz';
+function packSummary(items){
+  const kg = items.filter(i=>i[1]==='kg').reduce((s,i)=>s+i[0],0);
+  const pz = items.filter(i=>i[1]==='pz').map(i=>i[0]+' '+i[2].toLowerCase());
+  return (kg.toLocaleString('it-IT')+' kg di carne') + (pz.length ? ' + '+pz.join(' + ') : '');
+}
+function renderPacks(cat){
+  const c = PACKS[cat];
+  $('#ptag').textContent = c.tag;
+  $('#packs').dataset.n = c.list.length;
+  $('#packs').innerHTML = c.list.map((p,i)=>`<article class="pack">
+    <header><h3>Pacco ${cat[0].toUpperCase()+cat.slice(1)}</h3><div class="psum">${packSummary(p.items)}</div></header>
+    <ul>${p.items.map(it=>`<li><b>${qLabel(it)}</b><span>${it[2]}${it[3]?` <em>(${it[3]})</em>`:''}</span></li>`).join('')}</ul>
+    <footer><div class="pprice">${eur(p.price)}</div><div class="pbtns"><button class="btn btn-red" data-p="${i}">Aggiungi al carrello</button><a class="btn btn-wa" href="${waLink('Ciao, vorrei ordinare il Pacco '+p.name+'. Grazie!')}" target="_blank" rel="noopener">${WA_ICON}Ordina su WhatsApp</a></div></footer>
+  </article>`).join('');
+  const box = $('#packs'); box.classList.remove('fade-swap'); void box.offsetWidth; box.classList.add('fade-swap');
+  box.querySelectorAll('button[data-p]').forEach(b=>b.onclick=()=>add('Pacco '+c.list[+b.dataset.p].name, 1));
+}
+$('#ptabs').addEventListener('click', e=>{
+  const b = e.target.closest('button'); if(!b) return;
+  $('#ptabs').querySelectorAll('button').forEach(x=>{ x.classList.toggle('on', x===b); x.setAttribute('aria-selected', x===b); });
+  renderPacks(b.dataset.c);
+});
+renderPacks('famiglia');
+
+// --- Preparati pronti
+const PREPS = [
+  {n:'Tacos di carne', img:'tacos.jpg', pos:'50% 50%', size:'cover', d:'Piadina arrotolata con macinato, prosciutto e formaggio. Pronta per la padella o il forno.'},
+  {n:'Polpettone allo speck', img:'vetrina-suino.jpg', pos:'42% 50%', size:'270%', d:'Ripieno di speck e impanato a mano. In forno con le patate.'},
+  {n:'Rotolo farcito', img:'vetrina-preparati.jpg', pos:'80% 82%', size:'240%', d:'Carne arrotolata con ripieno di verdure, impanata e pronta da infornare.'},
+  {n:'Bistecche di lombo', img:'vetrina-preparati.jpg', pos:'74% 46%', size:'240%', d:'Marinate con limone, pepe rosa ed erbe aromatiche. Perfette alla griglia.'},
+  {n:'Polpette', img:'vetrina-preparati.jpg', pos:'20% 80%', size:'240%', d:'Fatte a mano ogni mattina. Per il sugo della domenica o al forno.'},
+  {n:'Cosce di pollo panate', img:'vetrina-suino.jpg', pos:'100% 100%', size:'230%', d:'Impanate e pronte per la padella o la friggitrice ad aria.'}
+];
+$('#prods').innerHTML = PREPS.map((p,i)=>`<article class="prod reveal">
+  <div class="ph"><div class="phi" style="background-image:url('img/foto/${p.img}');background-size:${p.size};background-position:${p.pos}" role="img" aria-label="${p.n}"></div></div>
+  <div class="bd"><h3>${p.n}</h3><div class="pp">${eur(PRICES[p.n])}/kg</div><p class="small">${p.d}</p>
+  <div class="pbtns"><button class="btn btn-red" data-i="${i}">Aggiungi 500 g · ${eur(priceOf(p.n,500))}</button><a class="btn btn-wa btn-icon" href="${waLink('Ciao, vorrei ordinare '+p.n+'. Grazie!')}" target="_blank" rel="noopener" aria-label="Ordina ${p.n} su WhatsApp">${WA_ICON}</a></div></div></article>`).join('');
+$('#prods').addEventListener('click', e=>{ const b=e.target.closest('button[data-i]'); if(b) add(PREPS[+b.dataset.i].n, 500); });
+$('#delivOrder').onclick = ()=> cart.size ? openD(true) : $('#preparati').scrollIntoView({behavior:'smooth'});
+
+// --- Galleria con lightbox (frecce, tastiera e swipe)
+const gal = [...document.querySelectorAll('#gallery .g')];
+let gi = 0, sx = null;
+function lbShow(i){
+  gi = (i + gal.length) % gal.length;
+  const img = gal[gi].querySelector('img');
+  $('#lbImg').src = img.src; $('#lbImg').alt = img.alt; $('#lbCap').textContent = img.alt + '  ·  ' + (gi+1) + ' / ' + gal.length;
+}
+function lbOpen(i){ lbShow(i); $('#lb').hidden = false; document.body.style.overflow = 'hidden'; $('#lbX').focus(); }
+function lbClose(){ $('#lb').hidden = true; document.body.style.overflow = ''; }
+gal.forEach((g,i)=>{ g.tabIndex = 0; g.addEventListener('click', ()=>lbOpen(i)); g.addEventListener('keydown', e=>{ if(e.key==='Enter') lbOpen(i); }); });
+$('#lbX').onclick = lbClose; $('#lbP').onclick = ()=>lbShow(gi-1); $('#lbN').onclick = ()=>lbShow(gi+1);
+$('#lb').addEventListener('click', e=>{ if(e.target.id==='lb') lbClose(); });
+addEventListener('keydown', e=>{ if($('#lb').hidden) return; if(e.key==='Escape') lbClose(); if(e.key==='ArrowLeft') lbShow(gi-1); if(e.key==='ArrowRight') lbShow(gi+1); });
+$('#lb').addEventListener('touchstart', e=>{ sx = e.touches[0].clientX; }, {passive:true});
+$('#lb').addEventListener('touchend', e=>{ if(sx===null) return; const dx = e.changedTouches[0].clientX - sx; if(Math.abs(dx)>50) lbShow(gi + (dx<0?1:-1)); sx = null; });
+
+// --- Nav, reviews, reveal
+addEventListener('scroll', ()=>$('#nav').classList.toggle('scrolled', scrollY>20), {passive:true});
+// --- Recensioni appese ai ganci: la carne oscilla al passaggio del cursore/dito
+const REVIEWS = [
+  {m:'tbone',name:'Francesco P.',meta:'Google · 6 anni fa',text:'Carne di prima scelta e ottimi preparati anche per i palati più esigenti. Personale molto cordiale e puntualità nelle consegne.',l:14},
+  {m:'salsicce',name:'Cliente Google',meta:'Recensione',text:'Ottime carni… gentilezza e cortesia da parte dei dipendenti!',l:30},
+  {m:'prosciutto',name:'Alessandro',meta:'Local Guide · 5 anni fa',text:'Ci andava mia nonna, ci andava mia madre ed ora ci sono io a continuare la tradizione servendomi da loro, sempre ottima la carne e i loro consigli su come preparare qualche piatto non comune.',l:6},
+  {m:'salame',name:'Cliente Google',meta:'Recensione',text:'Macelleria fornita, gestita da persone meravigliose.',l:24},
+  {m:'costata',name:'Giuseppe S.',meta:'Google · 2 anni fa',text:'Ottima qualità, prezzi ottimi, proprietario super disponibile e gentile. Ti accompagna nella selezione della carne per scegliere quella più adatta ai tuoi gusti. Consiglio vivamente a tutti!',l:10},
+  {m:'guanciale',name:'Alessandro',meta:'Local Guide',text:'Peccato si possano mettere solo 5 stelle, ne meriterebbero di più.',l:34}
+];
+const rack=$('#rack');
+const swing = REVIEWS.map((r,i)=>{
+  const el=document.createElement('div'); el.className='hang'; el.setAttribute('role','button'); el.tabIndex=0;
+  el.setAttribute('aria-label','Leggi la recensione di '+r.name);
+  el.innerHTML=`<div class="piece" style="--l:${r.l}px"><img src="img/${r.m}.png" alt="" draggable="false"><div class="tag"><div class="s">★★★★★</div>${r.name}</div></div>`;
+  rack.appendChild(el);
+  const it={el,piece:el.querySelector('.piece'),tag:el.querySelector('.tag'),a:0,v:0,ta:0,tv:0};
+  const pick=()=>{ showQuote(i); it.v += (Math.random()<.5?-1:1)*6; wake(); };
+  el.addEventListener('click',pick);
+  el.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); pick(); } });
+  return it;
+});
+function showQuote(i){
+  const r=REVIEWS[i], q=$('#quoteBox');
+  swing.forEach((s,k)=>s.el.classList.toggle('sel',k===i));
+  q.innerHTML=`<div class="stars">★★★★★</div><p></p><div class="who"><div class="av">${r.name[0]}</div><div>${r.name}<small>${r.meta}</small></div></div><div class="qcount">${i+1} / ${REVIEWS.length}</div>`;
+  q.querySelector('p').textContent=r.text;
+  q.classList.remove('fade-swap'); void q.offsetWidth; q.classList.add('fade-swap');
+}
+showQuote(4);
+
+const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+let lastX=null, running=false;
+rack.addEventListener('pointermove',e=>{
+  const dx = lastX===null ? 0 : e.clientX-lastX; lastX=e.clientX;
+  if(!dx || still) return;
+  swing.forEach(it=>{
+    const r=it.piece.getBoundingClientRect();
+    if(e.clientX>r.left-12 && e.clientX<r.right+12 && e.clientY>r.top && e.clientY<r.bottom+20){
+      // più in basso si colpisce, più forte è la spinta (come un pendolo vero)
+      const lever = .4 + (e.clientY-r.top)/r.height;
+      it.v -= Math.max(-30,Math.min(30,dx)) * .22 * lever;
+    }
+  });
+  wake();
+});
+rack.addEventListener('pointerleave',()=>lastX=null);
+rack.addEventListener('pointerdown',e=>{ lastX=e.clientX; });
+function wake(){ if(!running && !still){ running=true; requestAnimationFrame(tick); } }
+function tick(){
+  let moving=false;
+  swing.forEach(it=>{
+    it.v += -it.a*.028; it.v *= .968; it.a += it.v;
+    it.a = Math.max(-38,Math.min(38,it.a));
+    // il cartellino segue con ritardo, come un secondo pendolo
+    it.tv += -it.ta*.05 - it.v*.09; it.tv *= .9; it.ta += it.tv;
+    it.piece.style.transform=`rotate(${it.a.toFixed(2)}deg)`;
+    it.tag.style.transform=`rotate(${it.ta.toFixed(2)}deg)`;
+    if(Math.abs(it.a)>.03||Math.abs(it.v)>.03||Math.abs(it.ta)>.03) moving=true;
+  });
+  if(moving) requestAnimationFrame(tick); else running=false;
+}
+// un filo d'aria: ogni tanto un pezzo si muove da solo
+let rackVisible=false;
+new IntersectionObserver(es=>rackVisible=es[0].isIntersecting).observe(rack);
+setInterval(()=>{ if(!rackVisible||still) return; const it=swing[Math.floor(Math.random()*swing.length)]; it.v+=(Math.random()-.5)*2.4; wake(); },1800);
+const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} }),{threshold:.12});
+document.querySelectorAll('.reveal').forEach((el,i)=>{ el.style.transitionDelay=(i%4)*80+'ms'; io.observe(el); });
+$('#yr').textContent=new Date().getFullYear();
+try{ JSON.parse(localStorage.getItem('tc_cart')||'[]').forEach(([n,g])=>{ if(PRICES[n]||PACK_PRICE[n]) cart.set(n,g); }); }catch(e){}
+renderCart();
+(async ()=>{
+  const q = new URLSearchParams(location.search), esito = q.get('ordine');
+  if(!esito) return;
+  history.replaceState(null, '', location.pathname);
+  if(esito==='annullato'){ toast('Pagamento annullato: il tuo carrello è ancora qui'); openD(true); return; }
+  let order = null; try{ order = JSON.parse(localStorage.getItem('tc_pending')); }catch(e){}
+  try{
+    const r = await fetch('api/stato.php?session_id='+encodeURIComponent(q.get('session_id')||''));
+    const s = await r.json();
+    if(!s.completed){ toast('Il pagamento non risulta completato'); openD(true); return; }
+    if(!order || order.id!==s.id) order = null;
+  }catch(e){ toast('Non riusciamo a verificare il pagamento: controlla la tua email'); return; }
+  try{ localStorage.removeItem('tc_pending'); }catch(e){}
+  if(order){ openD(true); finish(order, true); }
+  else toast('Pagamento ricevuto, grazie! Trovi la conferma nella tua email');
+})();
+</script>
+</body>
+</html>

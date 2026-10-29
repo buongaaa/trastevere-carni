@@ -1,0 +1,7 @@
+# Chiavi Stripe e configurazione reale: non vanno mai su GitHub
+api/config.php
+# Ordini dei clienti salvati dal server
+ordini/
+# File di lavoro
+img/originali/
+*.zip
