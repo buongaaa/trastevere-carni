@@ -1,0 +1,7 @@
+# SITO IN MANUTENZIONE — per riaprire il sito eliminare questo blocco (o tutto il file)
+ErrorDocument 503 /manutenzione.html
+RewriteEngine On
+RewriteCond %{REQUEST_URI} !^/manutenzione\.html$
+RewriteCond %{REQUEST_URI} !^/img/logo\.png$
+RewriteCond %{REQUEST_URI} !^/api/webhook\.php$
+RewriteRule ^ - [R=503,L]
